@@ -60,7 +60,6 @@ Install the following tools:
 * [Azure Az PowerShell module](https://learn.microsoft.com/en-us/powershell/azure/install-az-ps)
 * [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 * [Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/install)
-* [WVDAdmin](https://www.itprocloud.com/wvdadmin/) - use this tool to simplify host pool creation and session host deployment after running the Bicep templates to deploy resources and custom images
 
 Install tools on Windows:
 
