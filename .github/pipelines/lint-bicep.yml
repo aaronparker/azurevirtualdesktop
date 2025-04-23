@@ -1,0 +1,23 @@
+name: Lint Bicep
+on:
+  pull_request:
+  workflow_dispatch:
+  paths:
+    - "modules/**"
+    - ".github/pipelines/lint-bicep.yml"
+
+jobs:
+  bicep-linter:
+    name: Bicep
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          # Incremental diffs require fetch depth to be at 0 to grab the target branch
+          fetch-depth: "0"
+      - name: Run Bicep Linter
+        uses: synergy-au/bicep-lint-action@v1
+        with:
+          analyse-all-files: "true" # optional, defaults to false (only analyse changed files)
+          bicep-version: "latest" # optional, defaults to latest
