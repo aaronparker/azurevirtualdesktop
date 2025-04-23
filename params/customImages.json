@@ -1,0 +1,216 @@
+{
+    "PooledDesktop": [
+        {
+            "name": "WindowsUpdate0",
+            "type": "WindowsUpdate"
+        },
+        {
+            "name": "WindowsUpdateRestart0",
+            "type": "WindowsRestart"
+        },
+        {
+            "name": "Create C:\\Apps\\Scripts",
+            "type": "PowerShell",
+            "inline": [
+                "New-Item -Path 'C:\\Apps\\Scripts' -ItemType Directory -Force"
+            ],
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Copy Functions.psm1",
+            "type": "File",
+            "sourceUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/Functions.psm1",
+            "destination": "C://Apps//Scripts//Functions.psm1"
+        },
+        {
+            "name": "Run_000_PrepImage",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/000_PrepImage.ps1",
+            "runAsSystem": true,
+            "runElevated": true,
+            "validExitCodes": [
+                0,
+                267014
+            ]
+        },
+        {
+            "name": "Run_011_SupportFunctions",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/011_SupportFunctions.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Run_013_RegionLanguage",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/013_RegionLanguage.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Run_014_RolesFeatures",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/014_RolesFeatures.ps1",
+            "runAsSystem": true,
+            "runElevated": true,
+            "validExitCodes": [
+                0,
+                267014
+            ]
+        },
+        {
+            "name": "Run_015_Customise",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/015_Customise.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Restart1",
+            "type": "WindowsRestart"
+        },
+        {
+            "name": "Run_100_MicrosoftVcRedists",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/100_MicrosoftVcRedists.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Run_101_Avd-AgentMicrosoftWvdMultimediaRedirection",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/101_Avd-AgentMicrosoftWvdMultimediaRedirection.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Run_101_Avd-AgentMicrosoftWvdRtcService",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/101_Avd-AgentMicrosoftWvdRtcService.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Run_102_MicrosoftFSLogixApps",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/102_MicrosoftFSLogixApps.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Run_103_MicrosoftNET",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/103_MicrosoftNET.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Run_104_MicrosoftEdge",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/104_MicrosoftEdge.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Run_200_MicrosoftOneDrive",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/200_MicrosoftOneDrive.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Run_201_MicrosoftTeams",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/201_MicrosoftTeams.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Run_202_Microsoft365Apps",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/202_Microsoft365Apps.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "203_MicrosoftOutlook",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/203_MicrosoftOutlook.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Run_211_MicrosoftVisualStudioCode",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/211_MicrosoftVisualStudioCode.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Run_400_AdobeAcrobatReaderDC",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/400_AdobeAcrobatReaderDC.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Run_408_RemoteDesktopAnalyzer",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/408_RemoteDesktopAnalyzer.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Run_100_MicrosoftVcRedists",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/100_MicrosoftVcRedists.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "AppsRestart0",
+            "type": "WindowsRestart"
+        },
+        {
+            "name": "Run_Enable-IgnoreRemoteKeyboardLayout",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/Enable-IgnoreRemoteKeyboardLayout.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Run_OptimiseImage",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/Install-MicrosoftVdot.ps1",
+            "runAsSystem": true,
+            "runElevated": true,
+            "validExitCodes": [
+                0,
+                267014
+            ]
+        },
+        {
+            "name": "Run_Invoke-DefenderScan",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/Invoke-DefenderScan.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "Run_999_CleanupImage",
+            "type": "PowerShell",
+            "scriptUri": "https://stavdxxopw2ptwuo5o.blob.core.windows.net/scripts/999_CleanupImage.ps1",
+            "runAsSystem": true,
+            "runElevated": true
+        },
+        {
+            "name": "WindowsUpdate1",
+            "type": "WindowsUpdate"
+        },
+        {
+            "name": "WindowsUpdateRestart1",
+            "type": "WindowsRestart"
+        }
+    ]
+}

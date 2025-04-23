@@ -1,0 +1,290 @@
+[
+    {
+        "name": "AllowImageProxyInbound",
+        "properties": {
+            "access": "Allow",
+            "description": "Allow Image Builder Private Link Access to Proxy VM",
+            "destinationAddressPrefix": "VirtualNetwork",
+            "destinationAddressPrefixes": [],
+            "destinationPortRange": "60000-60001",
+            "destinationPortRanges": [],
+            "direction": "Inbound",
+            "priority": 100,
+            "protocol": "TCP",
+            "sourceAddressPrefix": "AzureLoadBalancer",
+            "sourceAddressPrefixes": [],
+            "sourcePortRange": "*",
+            "sourcePortRanges": []
+        }
+    },
+    {
+        "name": "DenyAnySMTPOutbound",
+        "properties": {
+            "access": "Deny",
+            "description": "Deny any SMTP outbound to the internet",
+            "destinationAddressPrefix": "Internet",
+            "destinationAddressPrefixes": [],
+            "destinationPortRange": "25",
+            "destinationPortRanges": [],
+            "direction": "Outbound",
+            "priority": 100,
+            "protocol": "TCP",
+            "sourceAddressPrefix": "*",
+            "sourceAddressPrefixes": [],
+            "sourcePortRange": "*",
+            "sourcePortRanges": []
+        }
+    },
+    {
+        "name": "DenyAnySMTPSOutbound",
+        "properties": {
+            "access": "Deny",
+            "description": "Deny any SMTPS outbound to the internet",
+            "destinationAddressPrefix": "Internet",
+            "destinationAddressPrefixes": [],
+            "destinationPortRange": "465",
+            "destinationPortRanges": [],
+            "direction": "Outbound",
+            "priority": 110,
+            "protocol": "TCP",
+            "sourceAddressPrefix": "*",
+            "sourceAddressPrefixes": [],
+            "sourcePortRange": "*",
+            "sourcePortRanges": []
+        }
+    },
+    {
+        "name": "DenyAnyPOP3Outbound",
+        "properties": {
+            "access": "Deny",
+            "description": "Deny any POP3 outbound to the internet",
+            "destinationAddressPrefix": "Internet",
+            "destinationAddressPrefixes": [],
+            "destinationPortRange": "110",
+            "destinationPortRanges": [],
+            "direction": "Outbound",
+            "priority": 120,
+            "protocol": "TCP",
+            "sourceAddressPrefix": "*",
+            "sourceAddressPrefixes": [],
+            "sourcePortRange": "*",
+            "sourcePortRanges": []
+        }
+    },
+    {
+        "name": "DenyAnyPOP3SOutbound",
+        "properties": {
+            "access": "Deny",
+            "description": "Deny any POP3S outbound to the internet",
+            "destinationAddressPrefix": "Internet",
+            "destinationAddressPrefixes": [],
+            "destinationPortRange": "995",
+            "destinationPortRanges": [],
+            "direction": "Outbound",
+            "priority": 130,
+            "protocol": "TCP",
+            "sourceAddressPrefix": "*",
+            "sourceAddressPrefixes": [],
+            "sourcePortRange": "*",
+            "sourcePortRanges": []
+        }
+    },
+    {
+        "name": "DenyAnyIMAPOutbound",
+        "properties": {
+            "access": "Deny",
+            "description": "Deny any IMAP outbound to the internet",
+            "destinationAddressPrefix": "Internet",
+            "destinationAddressPrefixes": [],
+            "destinationPortRange": "143",
+            "destinationPortRanges": [],
+            "direction": "Outbound",
+            "priority": 140,
+            "protocol": "TCP",
+            "sourceAddressPrefix": "*",
+            "sourceAddressPrefixes": [],
+            "sourcePortRange": "*",
+            "sourcePortRanges": []
+        }
+    },
+    {
+        "name": "DenyAnyIMAPSOutbound",
+        "properties": {
+            "access": "Deny",
+            "description": "Deny any IMAPS outbound to the internet",
+            "destinationAddressPrefix": "Internet",
+            "destinationAddressPrefixes": [],
+            "destinationPortRange": "993",
+            "destinationPortRanges": [],
+            "direction": "Outbound",
+            "priority": 150,
+            "protocol": "TCP",
+            "sourceAddressPrefix": "*",
+            "sourceAddressPrefixes": [],
+            "sourcePortRange": "*",
+            "sourcePortRanges": []
+        }
+    },
+    {
+        "name": "DenyAnySMBOutbound",
+        "properties": {
+            "access": "Deny",
+            "description": "Deny any SMB outbound to the internet",
+            "destinationAddressPrefix": "Internet",
+            "destinationAddressPrefixes": [],
+            "destinationPortRange": "445",
+            "destinationPortRanges": [],
+            "direction": "Outbound",
+            "priority": 160,
+            "protocol": "TCP",
+            "sourceAddressPrefix": "*",
+            "sourceAddressPrefixes": [],
+            "sourcePortRange": "*",
+            "sourcePortRanges": []
+        }
+    },
+    {
+        "name": "DenyAnyNetBIOSNameResolutionOutbound",
+        "properties": {
+            "access": "Deny",
+            "description": "Deny any NetBIOS name resolution outbound to the internet",
+            "destinationAddressPrefix": "Internet",
+            "destinationAddressPrefixes": [],
+            "destinationPortRange": "137",
+            "destinationPortRanges": [],
+            "direction": "Outbound",
+            "priority": 170,
+            "protocol": "UDP",
+            "sourceAddressPrefix": "*",
+            "sourceAddressPrefixes": [],
+            "sourcePortRange": "*",
+            "sourcePortRanges": []
+        }
+    },
+    {
+        "name": "DenyAnyNetBIOSDatagramOutbound",
+        "properties": {
+            "access": "Deny",
+            "description": "Deny any NetBIOS datagram service outbound to the internet",
+            "destinationAddressPrefix": "Internet",
+            "destinationAddressPrefixes": [],
+            "destinationPortRange": "138",
+            "destinationPortRanges": [],
+            "direction": "Outbound",
+            "priority": 180,
+            "protocol": "UDP",
+            "sourceAddressPrefix": "*",
+            "sourceAddressPrefixes": [],
+            "sourcePortRange": "*",
+            "sourcePortRanges": []
+        }
+    },
+    {
+        "name": "DenyAnyNetBIOSSessionOutbound",
+        "properties": {
+            "access": "Deny",
+            "description": "Deny any NetBIOS session service outbound to the internet",
+            "destinationAddressPrefix": "Internet",
+            "destinationAddressPrefixes": [],
+            "destinationPortRange": "139",
+            "destinationPortRanges": [],
+            "direction": "Outbound",
+            "priority": 190,
+            "protocol": "TCP",
+            "sourceAddressPrefix": "*",
+            "sourceAddressPrefixes": [],
+            "sourcePortRange": "*",
+            "sourcePortRanges": []
+        }
+    },
+    {
+        "name": "DenyAnyTFTPOutbound",
+        "properties": {
+            "access": "Deny",
+            "description": "Deny any Trivial File Transfer Protocol outbound to the internet",
+            "destinationAddressPrefix": "Internet",
+            "destinationAddressPrefixes": [],
+            "destinationPortRange": "69",
+            "destinationPortRanges": [],
+            "direction": "Outbound",
+            "priority": 200,
+            "protocol": "UDP",
+            "sourceAddressPrefix": "*",
+            "sourceAddressPrefixes": [],
+            "sourcePortRange": "*",
+            "sourcePortRanges": []
+        }
+    },
+    {
+        "name": "DenyAnySysLogOutbound",
+        "properties": {
+            "access": "Deny",
+            "description": "Deny any System Log outbound to the internet",
+            "destinationAddressPrefix": "Internet",
+            "destinationAddressPrefixes": [],
+            "destinationPortRange": "514",
+            "destinationPortRanges": [],
+            "direction": "Outbound",
+            "priority": 210,
+            "protocol": "UDP",
+            "sourceAddressPrefix": "*",
+            "sourceAddressPrefixes": [],
+            "sourcePortRange": "*",
+            "sourcePortRanges": []
+        }
+    },
+    {
+        "name": "DenyAnySNMPOutbound",
+        "properties": {
+            "access": "Deny",
+            "description": "Deny any Simple Network Management Protocol outbound to the internet",
+            "destinationAddressPrefix": "Internet",
+            "destinationAddressPrefixes": [],
+            "destinationPortRange": "161-162",
+            "destinationPortRanges": [],
+            "direction": "Outbound",
+            "priority": 220,
+            "protocol": "UDP",
+            "sourceAddressPrefix": "*",
+            "sourceAddressPrefixes": [],
+            "sourcePortRange": "*",
+            "sourcePortRanges": []
+        }
+    },
+    {
+        "name": "DenyAnyIRCOutbound",
+        "properties": {
+            "access": "Deny",
+            "description": "Deny any Internet Relay Chat outbound to the internet",
+            "destinationAddressPrefix": "Internet",
+            "destinationAddressPrefixes": [],
+            "destinationPortRange": "6660-6669",
+            "destinationPortRanges": [],
+            "direction": "Outbound",
+            "priority": 230,
+            "protocol": "TCP",
+            "sourceAddressPrefix": "*",
+            "sourceAddressPrefixes": [],
+            "sourcePortRange": "*",
+            "sourcePortRanges": []
+        }
+    },
+    {
+        "name": "DenyAnyWinRMOutbound",
+        "properties": {
+            "access": "Deny",
+            "description": "Deny any WinRM outbound to the internet",
+            "destinationAddressPrefix": "Internet",
+            "destinationAddressPrefixes": [],
+            "destinationPortRange": "5986",
+            "destinationPortRanges": [],
+            "direction": "Outbound",
+            "priority": 240,
+            "protocol": "TCP",
+            "sourceAddressPrefix": "*",
+            "sourceAddressPrefixes": [],
+            "sourcePortRange": "*",
+            "sourcePortRanges": []
+        }
+    }
+]

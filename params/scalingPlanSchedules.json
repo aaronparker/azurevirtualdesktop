@@ -1,0 +1,50 @@
+[
+    {
+        "name": "weekdays_schedule",
+        "daysOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "scalingMethod": "PowerManage",
+        "rampUpStartTime": {
+            "hour": 8,
+            "minute": 0
+        },
+        "rampUpLoadBalancingAlgorithm": "BreadthFirst",
+        "rampUpMinimumHostsPct": 20,
+        "rampUpCapacityThresholdPct": 60,
+        "peakStartTime": {
+            "hour": 9,
+            "minute": 0
+        },
+        "peakLoadBalancingAlgorithm": "DepthFirst",
+        "rampDownStartTime": {
+            "hour": 18,
+            "minute": 0
+        },
+        "rampDownLoadBalancingAlgorithm": "DepthFirst",
+        "rampDownMinimumHostsPct": 10,
+        "rampDownCapacityThresholdPct": 90,
+        "rampDownWaitTimeMinutes": 30,
+        "rampDownStopHostsWhen": "ZeroSessions",
+        "rampDownNotificationMessage": "You will be logged off in 30 min. Make sure to save your work.",
+        "offPeakStartTime": {
+            "hour": 22,
+            "minute": 0
+        },
+        "offPeakLoadBalancingAlgorithm": "DepthFirst",
+        "rampDownForceLogoffUsers": true,
+        "generalActiveMinimumHostsPct": null,
+        "generalMaximumHostPoolSize": null,
+        "generalMinimumHostPoolSize": null,
+        "createDelete": {
+            "rampUpMaximumHostPoolSize": null,
+            "rampUpMinimumHostPoolSize": null,
+            "rampDownMaximumHostPoolSize": null,
+            "rampDownMinimumHostPoolSize": null
+        }
+    }
+]

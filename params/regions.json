@@ -1,0 +1,308 @@
+[
+    {
+        "location": "australiaeast",
+        "deployRegion": false,
+        "properties": {
+            "metaDataRegion": "australiaeast",
+            "shortName": "aue",
+            "pairedRegion": "australiaeast",
+            "environment": "Production",
+            "language": "en-us",
+            "timeZone": "AUS Eastern Standard Time",
+            "deployKeyVault": true,
+            "deployLogAnalytics": true
+        },
+        "coreResourceGroups": [
+                {
+                    "name": "Images",
+                    "resourceGroupLiteralName": "",
+                    "function": "Azure Virtual Desktop custom images",
+                    "criticality": "Medium",
+                    "type": "Images"
+                },
+                {
+                    "name": "Management",
+                    "resourceGroupLiteralName": "",
+                    "function": "Azure Virtual Desktop management",
+                    "criticality": "High",
+                    "type": "Management"
+                },
+                {
+                    "name": "Network",
+                    "resourceGroupLiteralName": "",
+                    "function": "Azure Virtual Desktop session host network",
+                    "criticality": "High",
+                    "type": "Network"
+                },
+                {
+                    "name": "NerdioManager",
+                    "resourceGroupLiteralName": "",
+                    "function": "Nerdio Manager for Enterprise",
+                    "criticality": "High",
+                    "type": "Management"
+                }
+        ],
+        "network": {
+            "deployNetwork": true,
+            "name": "HostPools",
+            "networkLiteralName": "",
+            "resourceGroup": "Network",
+            "deployNatGateway": true,
+            "addressSpace": "172.16.1.0/24",
+            "dnsServers": [],
+            "storageSubnetName": "Storage",
+            "subnets": [
+                {
+                    "name": "Images",
+                    "subnetPrefix": "172.16.1.0/27",
+                    "privateLinkService": "Disabled"
+                },
+                {
+                    "name": "Storage",
+                    "subnetPrefix": "172.16.1.32/27",
+                    "privateLinkService": "Enabled"
+                },
+                {
+                    "name": "Management",
+                    "subnetPrefix": "172.16.1.64/27",
+                    "privateLinkService": "Enabled"
+                },
+                {
+                    "name": "Desktops1",
+                    "subnetPrefix": "172.16.1.96/27",
+                    "privateLinkService": "Enabled"
+                },
+                {
+                    "name": "Desktops2",
+                    "subnetPrefix": "172.16.1.128/27",
+                    "privateLinkService": "Enabled"
+                },
+                {
+                    "name": "Desktops3",
+                    "subnetPrefix": "172.16.1.160/27",
+                    "privateLinkService": "Enabled"
+                },
+                {
+                    "name": "Desktops4",
+                    "subnetPrefix": "172.16.1.192/27",
+                    "privateLinkService": "Enabled"
+                }
+            ]
+        },
+        "customImages": {
+            "deployImages": true,
+            "resourceGroup": "Images",
+            "resourceGroupLiteralName": "",
+            "subnet": "Images",
+            "images": [
+                {
+                    "publisher": "MicrosoftWindowsDesktop",
+                    "offer": "Windows-11",
+                    "sku": "win11-24h2-avd",
+                    "imageDescription": "Windows 11 Enterprise 24H2 multi-session",
+                    "customisers": "PooledDesktop"
+                },
+                {
+                    "publisher": "MicrosoftWindowsDesktop",
+                    "offer": "Windows-11",
+                    "sku": "win11-24h2-ent",
+                    "imageDescription": "Windows 11 Enterprise 24H2 single-session",
+                    "customisers": "PooledDesktop"
+                }
+            ],
+            "imageStorageSku": "Standard_ZRS",
+            "imageContainers": [
+                "binaries",
+                "configs",
+                "variables",
+                "scripts"
+            ],
+            "replicationRegions": [
+            ]
+        },
+        "workspace": {
+            "deployWorkspace": true,
+            "resourceGroup": "Management",
+            "resourceGroupLiteralName": "",
+            "workspaceName": "",
+            "workspaceLiteralName": "",
+            "friendlyName": "Australia East"
+        },
+        "hostPools": [
+            {
+                "name": "HostPool01",
+                "resourceGroupLiteralName": "",
+                "hostPoolLiteralName": "",
+                "function": "Single-session",
+                "criticality": "Medium",
+                "type": "Pooled",
+                "deployStorage": false,
+                "premiumStorageSku": "Premium_ZRS",
+                "storageAccountLiteralName": "",
+                "fileShares": [
+                    "profilecontainer"
+                ],
+                "subnet": "Desktops1",
+                "description": "Windows 11 Enterprise pooled desktop",
+                "friendlyName": "Windows 11 dynamic",
+                "loadBalancerType": "BreadthFirst",
+                "maxSessionLimit": 1,
+                "assignmentType": "Automatic",
+                "appGroupType": "Desktop",
+                "appGroupFriendlyName": "Windows 11 dynamic",
+                "maintenanceWindows": [
+                    {
+                        "dayOfWeek": "Wednesday",
+                        "hour": 23
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "location": "westus3",
+        "deployRegion": true,
+        "properties": {
+            "metaDataRegion": "westus3",
+            "shortName": "wus3",
+            "pairedRegion": "westus2",
+            "environment": "Production",
+            "language": "en-us",
+            "timeZone": "Pacific Standard Time",
+            "deployKeyVault": true,
+            "deployLogAnalytics": true
+        },
+        "coreResourceGroups": [
+                {
+                    "name": "Images",
+                    "resourceGroupLiteralName": "",
+                    "function": "Azure Virtual Desktop custom images",
+                    "criticality": "Medium",
+                    "type": "Images"
+                },
+                {
+                    "name": "Management",
+                    "resourceGroupLiteralName": "",
+                    "function": "Azure Virtual Desktop management",
+                    "criticality": "High",
+                    "type": "Management"
+                },
+                {
+                    "name": "Network",
+                    "resourceGroupLiteralName": "",
+                    "function": "Azure Virtual Desktop session host network",
+                    "criticality": "High",
+                    "type": "Network"
+                }
+        ],
+        "network": {
+            "deployNetwork": true,
+            "name": "HostPools",
+            "networkLiteralName": "",
+            "resourceGroup": "Network",
+            "deployNatGateway": true,
+            "addressSpace": "172.16.1.0/24",
+            "dnsServers": [],
+            "storageSubnetName": "Storage",
+            "subnets": [
+                {
+                    "name": "Images",
+                    "subnetPrefix": "172.16.1.0/27",
+                    "privateLinkService": "Disabled"
+                },
+                {
+                    "name": "Storage",
+                    "subnetPrefix": "172.16.1.32/27",
+                    "privateLinkService": "Enabled"
+                },
+                {
+                    "name": "Management",
+                    "subnetPrefix": "172.16.1.64/27",
+                    "privateLinkService": "Enabled"
+                },
+                {
+                    "name": "Desktops1",
+                    "subnetPrefix": "172.16.1.96/27",
+                    "privateLinkService": "Enabled"
+                },
+                {
+                    "name": "Desktops2",
+                    "subnetPrefix": "172.16.1.128/27",
+                    "privateLinkService": "Enabled"
+                },
+                {
+                    "name": "Desktops3",
+                    "subnetPrefix": "172.16.1.160/27",
+                    "privateLinkService": "Enabled"
+                },
+                {
+                    "name": "Desktops4",
+                    "subnetPrefix": "172.16.1.192/27",
+                    "privateLinkService": "Enabled"
+                }
+            ]
+        },
+        "customImages": {
+            "deployImages": true,
+            "resourceGroup": "Images",
+            "resourceGroupLiteralName": "",
+            "subnet": "Images",
+            "images": [
+                {
+                    "publisher": "MicrosoftWindowsDesktop",
+                    "offer": "Windows-11",
+                    "sku": "win11-24h2-ent",
+                    "imageDescription": "Windows 11 Enterprise 24H2 single-session",
+                    "customisers": "PooledDesktop"
+                }
+            ],
+            "imageStorageSku": "Standard_ZRS",
+            "imageContainers": [
+                "binaries",
+                "configs",
+                "variables",
+                "scripts"
+            ],
+            "replicationRegions": [
+            ]
+        },
+        "workspace": {
+            "deployWorkspace": true,
+            "resourceGroup": "Management",
+            "resourceGroupLiteralName": "",
+            "workspaceName": "",
+            "workspaceLiteralName": "",
+            "friendlyName": "West US 3"
+        },
+        "hostPools": [
+            {
+                "name": "HostPool01",
+                "resourceGroupLiteralName": "",
+                "hostPoolLiteralName": "",
+                "function": "Single-session",
+                "criticality": "Medium",
+                "type": "Personal",
+                "deployStorage": false,
+                "premiumStorageSku": "Premium_ZRS",
+                "storageAccountLiteralName": "",
+                "fileShares": [
+                    "profilecontainer"
+                ],
+                "subnet": "Desktops1",
+                "description": "Windows 11 Enterprise personal desktop",
+                "friendlyName": "Windows 11 personal",
+                "loadBalancerType": "BreadthFirst",
+                "maxSessionLimit": 1,
+                "assignmentType": "Automatic",
+                "appGroupType": "Desktop",
+                "appGroupFriendlyName": "Windows 11 personal",
+                "maintenanceWindows": [
+                    {
+                        "dayOfWeek": "Wednesday",
+                        "hour": 23
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,1 @@
+(device.deviceManufacturer -eq "Microsoft Corporation") and (device.deviceModel -eq "Virtual Machine") and (device.profileType -eq "SecureVM") and (device.deviceOSType -eq "Windows") and (device.devicePhysicalIds -any (_ -contains "[AzureResourceId]:/subscriptions/3fc4c8ac-a2b8-4b39-9729-f1a5eeacbab5/resourceGroups/rg-Avd-HostPool01-australiaeast"))

@@ -1,0 +1,27 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"cSpell.words": [
+			"australiaeast",
+			"dnsgroupname",
+			"eastus",
+			"natgateway",
+			"natgatewayname",
+			"Nerdio",
+			"Peerings",
+			"privateendpoints",
+			"privatelink",
+			"profilecontainer",
+			"publicip",
+			"publicipname",
+			"resourcegroups",
+			"stavd",
+			"uksouth",
+			"westus"
+		]
+	}
+}
