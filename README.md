@@ -2,8 +2,6 @@
 
 Azure Bicep, image scripts, and policy configurations for Azure Virtual Desktop.
 
-[[_TOC_]]
-
 ## Azure Bicep Templates
 
 [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep) templates for a multi-region deployment of Azure Virtual Desktop. This assumes that you are using the Azure CLI under PowerShell on Windows, macOS or Linux.
