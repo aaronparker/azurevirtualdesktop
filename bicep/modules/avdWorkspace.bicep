@@ -28,7 +28,7 @@ param tagsUnion object = union (tags, {
 })
 
 // Create the AVD workspace
-resource avdWorkspace 'Microsoft.DesktopVirtualization/workspaces@2023-10-04-preview' = {
+resource avdWorkspace 'Microsoft.DesktopVirtualization/workspaces@2024-04-03' = {
   name: workspaceName
   location: ((!empty(metaDataLocation)) ? metaDataLocation : resourceGroup().location)
   tags: tagsUnion

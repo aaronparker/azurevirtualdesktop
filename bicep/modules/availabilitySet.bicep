@@ -22,7 +22,7 @@ param tagsUnion object = union (tags, {
   Type: resourceGroup().tags.Type
 })
 
-resource availabilitySets 'Microsoft.Compute/availabilitySets@2024-03-01' = {
+resource availabilitySets 'Microsoft.Compute/availabilitySets@2024-11-01' = {
   name: '${abbr.availSet}-${abbr.service}-${hostPool.name}-${regionShortName}'
   location: resourceGroup().location
   tags: tagsUnion

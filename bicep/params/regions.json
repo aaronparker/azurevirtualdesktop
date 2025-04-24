@@ -165,7 +165,7 @@
         "properties": {
             "metaDataRegion": "westus3",
             "shortName": "wus3",
-            "pairedRegion": "westus2",
+            "pairedRegion": "australiaeast",
             "environment": "Production",
             "language": "en-us",
             "timeZone": "Pacific Standard Time",

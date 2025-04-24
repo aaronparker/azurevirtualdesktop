@@ -54,25 +54,25 @@ param tagsUnion object = union (tags, {
 })
 
 // Get details of subnets on the specified existing network
-resource vnet 'Microsoft.Network/virtualNetworks@2023-11-01' existing = {
+resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' existing = {
   name: virtualNetwork
   scope: resourceGroup(vnetResourceGroup)
 }
-resource vnetSubnets 'Microsoft.Network/virtualNetworks/subnets@2023-11-01' existing = [for subnet in subnets: {
+resource vnetSubnets 'Microsoft.Network/virtualNetworks/subnets@2024-05-01' existing = [for subnet in subnets: {
   name : subnet
   parent: vnet
 }]
-resource pipSubnet 'Microsoft.Network/virtualNetworks/subnets@2023-11-01' existing = {
+resource pipSubnet 'Microsoft.Network/virtualNetworks/subnets@2024-05-01' existing = {
   name : storageSubnet
   parent: vnet
 }
-resource privateDNSZone 'Microsoft.Network/privateDnsZones@2020-06-01' existing = {
+resource privateDNSZone 'Microsoft.Network/privateDnsZones@2024-06-01' existing = {
   name: privateDNSZoneName
   scope: resourceGroup(vnetResourceGroup)
 }
 
 // Create the storage account and file shares. Storage account name is trimmed to 15 characters
-resource storageAccount 'Microsoft.Storage/storageAccounts@2023-04-01' = {
+resource storageAccount 'Microsoft.Storage/storageAccounts@2024-01-01' = {
   name: storageAccountNameToUse
   location: location
   tags: tagsUnion
@@ -120,7 +120,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-04-01' = {
   }
 
   // Configure file services
-  resource fileServices 'fileServices@2023-04-01' = {
+  resource fileServices 'fileServices@2024-01-01' = {
     name: 'default'
     properties: {
       protocolSettings: startsWith(sku, 'Premium') ? {
@@ -141,7 +141,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-04-01' = {
     }
 
     // Create each of the specified file shares
-    resource shares 'shares@2023-04-01' = [for name in fileShares: {
+    resource shares 'shares@2024-01-01' = [for name in fileShares: {
       name: name
       properties: {
         accessTier: (startsWith(sku, 'Premium') ? 'Premium' : 'TransactionOptimized')
@@ -153,7 +153,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-04-01' = {
 }
 
 // Create the private endpoint and connect to the storage account
-module privateEndpoints 'privateendpoints.bicep' = {
+module privateEndpoints 'privateEndpoints.bicep' = {
   name: 'privateEndpoints${storageAccountNameToUse}'
   params: {
     location: location

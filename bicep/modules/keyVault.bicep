@@ -61,7 +61,7 @@ param skuName string = 'standard'
 // ])
 // param curveName string = ''
 
-resource vault 'Microsoft.KeyVault/vaults@2023-07-01' = {
+resource vault 'Microsoft.KeyVault/vaults@2024-11-01' = {
   name: keyVaultName
   location: location
   tags: tagsUnion
@@ -85,7 +85,7 @@ resource vault 'Microsoft.KeyVault/vaults@2023-07-01' = {
   }
 }
 
-// resource key 'Microsoft.KeyVault/vaults/keys@2023-07-01' = {
+// resource key 'Microsoft.KeyVault/vaults/keys@2024-11-01' = {
 //   parent: vault
 //   name: keyName
 //   properties: {

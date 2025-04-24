@@ -24,8 +24,8 @@ param customRdpProperty string
 @description('The time zone for the host pool')
 param timeZone string
 
-@description('The scaling plan schedules for the host pool')
-param scalingPlanSchedules array
+// @description('The scaling plan schedules for the host pool')
+// param scalingPlanSchedules array
 
 module avdHostPools 'avdHostPool.bicep' = [for hostPool in hostPools: {
   name: 'hostPool-${hostPool.name}'

@@ -190,7 +190,7 @@ var managedDiskSecurityProfile = {
 }
 var countOfSelectedAZ = length(availabilityZones)
 
-resource SessionHostVirtualMachineNic 'Microsoft.Network/networkInterfaces@2023-11-01' = [for i in range(0, rdshNumberOfInstances): {
+resource SessionHostVirtualMachineNic 'Microsoft.Network/networkInterfaces@2024-05-01' = [for i in range(0, rdshNumberOfInstances): {
     name: '${rdshPrefix}${(i+vmInitialNumber)}-nic'
     location: location
     extendedLocation: (empty(extendedLocation) ? null : extendedLocation)
@@ -214,7 +214,7 @@ resource SessionHostVirtualMachineNic 'Microsoft.Network/networkInterfaces@2023-
   }
 ]
 
-resource SessionHostVirtualMachine 'Microsoft.Compute/virtualMachines@2024-03-01' = [for i in range(0, rdshNumberOfInstances): {
+resource SessionHostVirtualMachine 'Microsoft.Compute/virtualMachines@2024-11-01' = [for i in range(0, rdshNumberOfInstances): {
     name: '${rdshPrefix}${(i+vmInitialNumber)}'
     location: location
     extendedLocation: (empty(extendedLocation) ? null : extendedLocation)
@@ -268,7 +268,7 @@ resource SessionHostVirtualMachine 'Microsoft.Compute/virtualMachines@2024-03-01
   }
 ]
 
-resource GuestAttestationExtension 'Microsoft.Compute/virtualMachines/extensions@2024-03-01' = [for i in range(0, rdshNumberOfInstances): if (integrityMonitoring) {
+resource GuestAttestationExtension 'Microsoft.Compute/virtualMachines/extensions@2024-11-01' = [for i in range(0, rdshNumberOfInstances): if (integrityMonitoring) {
     name: '${rdshPrefix}${(i+vmInitialNumber)}/GuestAttestation'
     location: location
     properties: {
@@ -297,7 +297,7 @@ resource GuestAttestationExtension 'Microsoft.Compute/virtualMachines/extensions
   }
 ]
 
-resource PowerShellDscExtension 'Microsoft.Compute/virtualMachines/extensions@2024-03-01' = [for i in range(0, rdshNumberOfInstances): {
+resource PowerShellDscExtension 'Microsoft.Compute/virtualMachines/extensions@2024-11-01' = [for i in range(0, rdshNumberOfInstances): {
     name: '${rdshPrefix}${(i+vmInitialNumber)}/Microsoft.PowerShell.DSC'
     location: location
     properties: {
@@ -333,7 +333,7 @@ resource PowerShellDscExtension 'Microsoft.Compute/virtualMachines/extensions@20
   }
 ]
 
-resource AadLoginForWindowsExtension 'Microsoft.Compute/virtualMachines/extensions@2024-03-01' = [for i in range(0, rdshNumberOfInstances): if (entraJoin && (contains(systemData, 'entraJoinPreview')
+resource AadLoginForWindowsExtension 'Microsoft.Compute/virtualMachines/extensions@2024-11-01' = [for i in range(0, rdshNumberOfInstances): if (entraJoin && (contains(systemData, 'entraJoinPreview')
     ? (!systemData.entraJoinPreview)
     : bool('true'))) {
     name: '${rdshPrefix}${(i+vmInitialNumber)}/AADLoginForWindows'
@@ -355,7 +355,7 @@ resource AadLoginForWindowsExtension 'Microsoft.Compute/virtualMachines/extensio
   }
 ]
 
-resource AdDomainJoinExtension 'Microsoft.Compute/virtualMachines/extensions@2024-03-01' = [for i in range(0, rdshNumberOfInstances): if (!entraJoin) {
+resource AdDomainJoinExtension 'Microsoft.Compute/virtualMachines/extensions@2024-11-01' = [for i in range(0, rdshNumberOfInstances): if (!entraJoin) {
     name: '${rdshPrefix}${(i+vmInitialNumber)}/joindomain'
     location: location
     properties: {
@@ -380,7 +380,7 @@ resource AdDomainJoinExtension 'Microsoft.Compute/virtualMachines/extensions@202
   }
 ]
 
-resource IaaSAntimalwareExtension 'Microsoft.Compute/virtualMachines/extensions@2024-03-01' = [for i in range(0, rdshNumberOfInstances): if (!empty(customConfigurationScriptUrl)) {
+resource IaaSAntimalwareExtension 'Microsoft.Compute/virtualMachines/extensions@2024-11-01' = [for i in range(0, rdshNumberOfInstances): if (!empty(customConfigurationScriptUrl)) {
   name: '${rdshPrefix}${(i+vmInitialNumber)}/IaaSAntimalware'
   location: location
   properties: {
@@ -411,7 +411,7 @@ resource IaaSAntimalwareExtension 'Microsoft.Compute/virtualMachines/extensions@
   ]
 }]
 
-resource CustomScriptExtension 'Microsoft.Compute/virtualMachines/extensions@2024-03-01' = [for i in range(0, rdshNumberOfInstances): if (!empty(customConfigurationScriptUrl)) {
+resource CustomScriptExtension 'Microsoft.Compute/virtualMachines/extensions@2024-11-01' = [for i in range(0, rdshNumberOfInstances): if (!empty(customConfigurationScriptUrl)) {
     name: '${rdshPrefix}${(i+vmInitialNumber)}/Microsoft.Compute.CustomScriptExtension'
     location: location
     properties: {

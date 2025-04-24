@@ -31,7 +31,7 @@ var securityRuleArray = [for (securityRule, i) in securityRules: {
   }
 }]
 
-resource nsg 'Microsoft.Network/networkSecurityGroups@2023-11-01' = {
+resource nsg 'Microsoft.Network/networkSecurityGroups@2024-05-01' = {
   name: nsgName
   location: location
   tags: tags

@@ -159,7 +159,7 @@ module avdHostPools 'modules/loopAvdHostPool.bicep' = [for region in regionsToDe
     metaDataLocation: ((empty(region.properties.metaDataRegion)) ? region.location : region.properties.metaDataRegion)
     regionShortName: region.properties.shortName
     timeZone: region.properties.timeZone
-    scalingPlanSchedules: scalingPlanSchedules
+    // scalingPlanSchedules: scalingPlanSchedules
   }
 }]
 

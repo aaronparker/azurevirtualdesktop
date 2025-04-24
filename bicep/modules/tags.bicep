@@ -1,6 +1,6 @@
 
-@description('Tags parameter input file.')
-var tags = json(loadTextContent('../params/tags.json'))
+// @description('Tags parameter input file.')
+// var tags = json(loadTextContent('../params/tags.json'))
 
 @allowed([
   'Azure Virtual Desktop'

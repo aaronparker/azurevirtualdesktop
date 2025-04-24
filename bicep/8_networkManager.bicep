@@ -1,7 +1,7 @@
 targetScope = 'subscription'
 
 @description('The region to deploy resources into')
-param location string = 'westus2'
+param location string = 'australiaeast'
 
 @description('Abbreviations for resource names')
 var abbr = json(loadTextContent('./params/abbreviations.json'))

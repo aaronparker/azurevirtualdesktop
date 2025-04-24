@@ -37,7 +37,7 @@ param tagsUnion object = union (tags, {
 })
 
 // Create a standard tier storage account with blob containers for use with custom images
-resource storageAccount 'Microsoft.Storage/storageAccounts@2023-04-01' = {
+resource storageAccount 'Microsoft.Storage/storageAccounts@2024-01-01' = {
   name: '${abbr.storage}${storageAccountName}'
   location: location
   tags: tagsUnion
@@ -74,7 +74,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-04-01' = {
     }
   }
 
-  resource blobServices 'blobServices@2023-04-01' = {
+  resource blobServices 'blobServices@2024-01-01' = {
     name: 'default'
     properties: {
       cors: {
@@ -82,7 +82,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-04-01' = {
       }
     }
 
-    resource containers 'containers@2023-04-01' = [for name in containerNames: {
+    resource containers 'containers@2024-01-01' = [for name in containerNames: {
       name: name
       properties: {
         publicAccess: 'Blob'

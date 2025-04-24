@@ -48,12 +48,12 @@ param tagsUnion object = union (tags, {
   LastUpdateDate: utcNow('yyyy-M-dd')
 })
 
-resource computeGallery 'Microsoft.Compute/galleries@2023-07-03' existing = {
+resource computeGallery 'Microsoft.Compute/galleries@2024-03-03' existing = {
   name: computeGalleryName
 }
 
 // Create the image gallery
-resource galleryImage 'Microsoft.Compute/galleries/images@2023-07-03' = {
+resource galleryImage 'Microsoft.Compute/galleries/images@2024-03-03' = {
   name: '${publisher}-${offer}-${sku}-${language}'
   parent: computeGallery
   location: location

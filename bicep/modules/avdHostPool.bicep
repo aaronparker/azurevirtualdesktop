@@ -88,7 +88,7 @@ resource avdHostPool 'Microsoft.DesktopVirtualization/hostPools@2024-04-03' = {
 }
 
 // Create an application group for this host pool
-resource appGroup 'Microsoft.DesktopVirtualization/applicationGroups@2023-09-05' = {
+resource appGroup 'Microsoft.DesktopVirtualization/applicationGroups@2024-04-03' = {
   name: '${hostPoolName}-dag'
   location: ((empty(metaDataLocation)) ? resourceGroup().location : metaDataLocation)
   tags: tagsUnion

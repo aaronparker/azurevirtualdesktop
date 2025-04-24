@@ -36,7 +36,7 @@ param tagsUnion object = union (tags, {
   Type: resourceGroup().tags.Type
 })
 
-resource networkManager 'Microsoft.Network/networkManagers@2023-11-01' = {
+resource networkManager 'Microsoft.Network/networkManagers@2024-05-01' = {
   name: networkManagerName
   location: location
   tags: tagsUnion
@@ -53,14 +53,14 @@ resource networkManager 'Microsoft.Network/networkManagers@2023-11-01' = {
     }
   }
 
-  resource networkGroup 'networkGroups@2023-11-01' = {
+  resource networkGroup 'networkGroups@2024-05-01' = {
     name: networkGroupName
     properties: {
       description: ngDescription
     }
   }
 
-  resource connectivityConfigurations 'connectivityConfigurations@2023-11-01' = {
+  resource connectivityConfigurations 'connectivityConfigurations@2024-05-01' = {
     name: '${service}-MeshNetwork'
     properties: {
       connectivityTopology: 'mesh'

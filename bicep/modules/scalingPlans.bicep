@@ -45,7 +45,7 @@ param hostpoolReferences array = []
 @description('The name of the tag associated with the VMs that will be excluded from the Scaling plan.')
 param exclusionTag string = ''
 
-resource scalingPlan 'Microsoft.DesktopVirtualization/scalingPlans@2023-09-05' = {
+resource scalingPlan 'Microsoft.DesktopVirtualization/scalingPlans@2024-04-03' = {
   name: scalingPlanName
   location: ((empty(metaDataLocation)) ? resourceGroup().location : metaDataLocation)
   tags: tagsUnion
@@ -60,14 +60,14 @@ resource scalingPlan 'Microsoft.DesktopVirtualization/scalingPlans@2023-09-05' =
   }
 }
 
-resource pooledSchedule 'Microsoft.DesktopVirtualization/scalingPlans/pooledSchedules@2023-09-05' = [for item in schedules: if (hostPool.type == 'Pooled') {
+resource pooledSchedule 'Microsoft.DesktopVirtualization/scalingPlans/pooledSchedules@2024-04-03' = [for item in schedules: if (hostPool.type == 'Pooled') {
     parent: scalingPlan
     name: '${item.name}'
     properties: item
   }
 ]
 
-resource personalSchedule 'Microsoft.DesktopVirtualization/scalingPlans/personalSchedules@2023-09-05' = [for item in schedules: if (hostPool.type == 'Personal') {
+resource personalSchedule 'Microsoft.DesktopVirtualization/scalingPlans/personalSchedules@2024-04-03' = [for item in schedules: if (hostPool.type == 'Personal') {
     parent: scalingPlan
     name: '${item.name}'
     properties: item

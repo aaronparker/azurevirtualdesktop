@@ -23,7 +23,7 @@ param tags object
 param resourceGroups array
 
 // Loop through the resource groups for this location, including tags
-resource createResourceGroups 'Microsoft.Resources/resourceGroups@2024-03-01' = [for group in resourceGroups: {
+resource createResourceGroups 'Microsoft.Resources/resourceGroups@2024-11-01' = [for group in resourceGroups: {
   name: ((!empty(group.resourceGroupLiteralName)) ? group.resourceGroupLiteralName : '${abbr.resourceGroup}-${abbr.service}-${group.name}-${regionShortName}')
   location: location
   tags: union (tags, {

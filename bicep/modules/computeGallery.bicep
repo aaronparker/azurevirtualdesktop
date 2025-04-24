@@ -33,13 +33,13 @@ param LastUpdateDate string = utcNow('yyyy-M-dd')
 
 
 // Create a managed identity to enable image builder access to target resource groups
-resource managedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+resource managedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2024-11-30' = {
   name: '${abbr.identity}${abbr.service}Images${location}'
   location: location
   tags: tagsUnion
 }
 
-resource imageGallery 'Microsoft.Compute/galleries@2023-07-03' = {
+resource imageGallery 'Microsoft.Compute/galleries@2024-03-03' = {
   name: '${abbr.computeGallery}${abbr.service}Images${location}'
   location: location
   tags: tagsUnion
@@ -49,7 +49,7 @@ resource imageGallery 'Microsoft.Compute/galleries@2023-07-03' = {
 }
 
 // Create the image definition
-resource imageDefinition 'Microsoft.Compute/galleries/images@2023-07-03' = [for image in images: {
+resource imageDefinition 'Microsoft.Compute/galleries/images@2024-03-03' = [for image in images: {
   name: '${image.publisher}-${image.offer}-${image.sku}-${imageLanguage}'
   location: location
   tags: union (tags, {

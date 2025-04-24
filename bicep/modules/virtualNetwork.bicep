@@ -89,7 +89,7 @@ var securityRuleArray = [for (securityRule, i) in nsgRules: {
   }
 }]
 
-resource nsg 'Microsoft.Network/networkSecurityGroups@2023-11-01' = {
+resource nsg 'Microsoft.Network/networkSecurityGroups@2024-05-01' = {
   name: hostPoolNsg
   location: location
   tags: tagsUnion
@@ -99,7 +99,7 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2023-11-01' = {
 }
 
 // Create a public IP for the NAT gateway
-resource publicip 'Microsoft.Network/publicIPAddresses@2023-11-01' = if (deployNatGateway) {
+resource publicip 'Microsoft.Network/publicIPAddresses@2024-05-01' = if (deployNatGateway) {
   name: publicIpName
   location: location
   tags: tagsUnion
@@ -114,7 +114,7 @@ resource publicip 'Microsoft.Network/publicIPAddresses@2023-11-01' = if (deployN
 }
 
 // Create the NAT gateway, and assign the public IP
-resource natgateway 'Microsoft.Network/natGateways@2023-11-01' = if (deployNatGateway) {
+resource natgateway 'Microsoft.Network/natGateways@2024-05-01' = if (deployNatGateway) {
   name: natGatewayName
   location: location
   tags: tagsUnion
@@ -132,7 +132,7 @@ resource natgateway 'Microsoft.Network/natGateways@2023-11-01' = if (deployNatGa
 }
 
 // Create the virtual network and subnets, assigning the NSG to all subnets, and assign the NAT gateway
-resource vnet 'Microsoft.Network/virtualNetworks@2023-11-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
   name: vnetName
   location: location
   tags: tagsUnion
@@ -166,7 +166,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-11-01' = {
 }
 
 // Create the private DNS zone required for private endpoints
-resource privateDNSZone 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+resource privateDNSZone 'Microsoft.Network/privateDnsZones@2024-06-01' = {
   name: privateDNSZoneName
   location: 'global'
   tags: tagsUnion
@@ -184,7 +184,7 @@ resource privateDNSZone 'Microsoft.Network/privateDnsZones@2020-06-01' = {
 }
 
 // Create a route table
-resource routeTable 'Microsoft.Network/routeTables@2023-11-01' = {
+resource routeTable 'Microsoft.Network/routeTables@2024-05-01' = {
   name: routeTableName
   location: location
   tags: tagsUnion
