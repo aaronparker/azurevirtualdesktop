@@ -145,8 +145,8 @@ Parameter files are used by the Bicep templates to define the deployment includi
 * `regions.json` -  defines one or more regions that services will be deployed into.  Enable a region for deployment by setting `"deployRegion": true`. To deploy a premium tier storage account for FSLogix Containers (e.g. pooled desktops) set `deployStorage": true`. Deploy a NAT gateway in each virtual network by setting `"deployNatGateway": true`
 * `abbreviations.json` - abbreviations used when naming Azure services. Prefixes are aligned to the Microsoft recommendations - [Define your naming convention](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming). **Note**: update the `service` value for the target environment
 * `tags.json` - values for some key tags - review and update these
-* `customimages.json` - defines a custom image for AVD session hosts using the Azure Image Builder. The template is configured to deploy the `PooledDesktop` image
-* `rdpsettings.json` - defines the advanced RDP properties to configure on host pools
+* `customImages.json` - defines a custom image for AVD session hosts using the Azure Image Builder. The template is configured to deploy the `PooledDesktop` image
+* `rdpSettings.json` - defines the advanced RDP properties to configure on host pools
 * `roles.json` - defines custom Entra ID roles to be used by the Azure Virtual Desktop service
 
 #### Tags
@@ -175,15 +175,15 @@ All resources deployed by these templates are tagged with
 * Host pools and application groups to be created in the target regions
 * An AVD workspace per region
 
-#### 2_customimage.bicep
+#### 2_customImage.bicep
 
-`2_customimage.bicep` defines custom images to be created in the target regions. Images are defined in `regions.json` including whether images are enabled for that region with `"deployImages": true`.
+`2_customImage.bicep` defines custom images to be created in the target regions. Images are defined in `regions.json` including whether images are enabled for that region with `"deployImages": true`.
 
 Not all regions support Azure Image Builder, see [Regions](https://learn.microsoft.com/en-us/azure/virtual-machines/image-builder-overview?tabs=azure-powershell#regions). You may need to create images in a region different to where AVD session hosts are deployed into. Ensure the `replicationRegions` in `regions.json` is defined with the target for replicated images.
 
-#### 4_sessionhosts.bicep
+#### 4_sessionHosts.bicep
 
-`4_sessionhosts.bicep` is used to deploy session hosts from a custom image. This template requires parameters to be set in the file - it does not read `regions.json`. If you're at this stage, you can use this Bicep template or [WVDAdmin](https://www.itprocloud.com/wvdadmin/) to deploy session hosts.
+`4_sessionHosts.bicep` is used to deploy session hosts from a custom image. This template requires parameters to be set in the file - it does not read `regions.json`. If you're at this stage, you can use this Bicep template or Nerdio Manager to deploy session hosts.
 
 ### Validate Deployment
 
