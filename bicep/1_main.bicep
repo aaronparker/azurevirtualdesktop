@@ -19,8 +19,8 @@ var nsgRules = json(loadTextContent('./params/nsgRules.json'))
 @description('The RDP properties for the host pool')
 var rdpProperties = json(loadTextContent('./params/rdpSettings.json'))
 
-@description('Scaling plan schedule settings')
-var scalingPlanSchedules = json(loadTextContent('./params/scalingPlanSchedules.json'))
+// @description('Scaling plan schedule settings')
+// var scalingPlanSchedules = json(loadTextContent('./params/scalingPlanSchedules.json'))
 
 @description('The UPN of the user deploying the environment - must pass via the CLI')
 param upn string
