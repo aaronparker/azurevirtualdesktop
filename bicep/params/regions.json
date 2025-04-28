@@ -1,7 +1,7 @@
 [
     {
         "location": "australiaeast",
-        "deployRegion": false,
+        "deployRegion": true,
         "properties": {
             "metaDataRegion": "australiaeast",
             "shortName": "aue",
@@ -90,7 +90,7 @@
             ]
         },
         "customImages": {
-            "deployImages": true,
+            "deployImages": false,
             "resourceGroup": "Images",
             "resourceGroupLiteralName": "",
             "subnet": "Images",
@@ -135,7 +135,7 @@
                 "hostPoolLiteralName": "",
                 "function": "Single-session",
                 "criticality": "Medium",
-                "type": "Pooled",
+                "type": "Personal",
                 "deployStorage": false,
                 "premiumStorageSku": "Premium_ZRS",
                 "storageAccountLiteralName": "",
@@ -143,13 +143,41 @@
                     "profilecontainer"
                 ],
                 "subnet": "Desktops1",
-                "description": "Windows 11 Enterprise pooled desktop",
-                "friendlyName": "Windows 11 dynamic",
+                "description": "Windows 11 Enterprise personal desktop",
+                "friendlyName": "Windows 11 personal",
                 "loadBalancerType": "BreadthFirst",
                 "maxSessionLimit": 1,
                 "assignmentType": "Automatic",
                 "appGroupType": "Desktop",
-                "appGroupFriendlyName": "Windows 11 dynamic",
+                "appGroupFriendlyName": "Windows 11 personal",
+                "maintenanceWindows": [
+                    {
+                        "dayOfWeek": "Wednesday",
+                        "hour": 23
+                    }
+                ]
+            },
+            {
+                "name": "HostPool02",
+                "resourceGroupLiteralName": "",
+                "hostPoolLiteralName": "",
+                "function": "Single-session",
+                "criticality": "Medium",
+                "type": "Pooled",
+                "deployStorage": false,
+                "premiumStorageSku": "Premium_ZRS",
+                "storageAccountLiteralName": "",
+                "fileShares": [
+                    "profilecontainer"
+                ],
+                "subnet": "Desktops2",
+                "description": "Windows 11 Enterprise multi-session pooled desktop",
+                "friendlyName": "Windows 11 pooled",
+                "loadBalancerType": "BreadthFirst",
+                "maxSessionLimit": 1,
+                "assignmentType": "Automatic",
+                "appGroupType": "Desktop",
+                "appGroupFriendlyName": "Windows 11 pooled",
                 "maintenanceWindows": [
                     {
                         "dayOfWeek": "Wednesday",
@@ -161,11 +189,11 @@
     },
     {
         "location": "westus3",
-        "deployRegion": true,
+        "deployRegion": false,
         "properties": {
             "metaDataRegion": "westus3",
             "shortName": "wus3",
-            "pairedRegion": "australiaeast",
+            "pairedRegion": "westus2",
             "environment": "Production",
             "language": "en-us",
             "timeZone": "Pacific Standard Time",

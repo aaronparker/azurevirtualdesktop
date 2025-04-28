@@ -29,7 +29,7 @@ param timeZone string
 
 module avdHostPools 'avdHostPool.bicep' = [for hostPool in hostPools: {
   name: 'hostPool-${hostPool.name}'
-  scope: resourceGroup()
+  scope: resourceGroup('${abbr.resourceGroup}-${abbr.service}-${hostPool.name}-${regionShortName}')
   params: {
     abbr: abbr
     tags: tags
