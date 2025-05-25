@@ -2,13 +2,13 @@
 
 Azure Bicep, image scripts, and policy configurations for Azure Virtual Desktop.
 
-## Azure Bicep Templates
+## 💪🏻 Azure Bicep Templates
 
 [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep) templates for a multi-region deployment of Azure Virtual Desktop. This assumes that you are using the Azure CLI under PowerShell on Windows, macOS or Linux.
 
 The current status of resources deployed by these templates is:
 
-**Core services**:
+**Core Services**:
 
 - [x] Standardised naming convention
 - [x] Required subscription roles
@@ -29,7 +29,7 @@ The current status of resources deployed by these templates is:
 - [x] Log Analytics workspace for Azure Virtual Desktop Insights
 - [x] Key vault
 
-**AVD services (if Nerdio Manager is not available)**:
+**AVD Services (if Nerdio Manager is not available)**:
 
 - [x] Image templates and custom images
 - [x] Managed identity for Azure Image Builder
@@ -77,7 +77,7 @@ brew install azure/bicep/bicep
 brew install azure-cli
 ```
 
-### Authentication
+### 🖥️ Authentication
 
 Sign into the target Azure environment with an account that has at least Contributor rights on the target subscription. Owner rights will be required configure roles and permissions on the subscription.
 
@@ -97,7 +97,7 @@ $Upn = (az account list --all | ConvertFrom-Json | Where-Object { $_.id -eq $Sub
 $Region = "australiaeast"
 ```
 
-#### Authentication Issues
+#### 🤒 Authentication Issues
 
 If you receive the following message when running `az` commands below used to set permissions:
 
@@ -113,7 +113,7 @@ Run this command:
 az config set core.enable_broker_on_windows=false
 ```
 
-### Enable Resource Providers
+### 🧩 Enable Resource Providers
 
 The following resource providers must be enabled on the target subscription:
 
@@ -136,9 +136,9 @@ az feature register --namespace Microsoft.VirtualMachineImages --name Triggers
 az provider register -n Microsoft.VirtualMachineImages
 ```
 
-### Bicep Templates
+### 💪🏻 Bicep Templates
 
-#### Parameter Files
+#### 🗂️ Parameter Files
 
 Parameter files are used by the Bicep templates to define the deployment including regions that services will be deployed into:
 
@@ -149,7 +149,7 @@ Parameter files are used by the Bicep templates to define the deployment includi
 * `rdpSettings.json` - defines the advanced RDP properties to configure on host pools
 * `roles.json` - defines custom Entra ID roles to be used by the Azure Virtual Desktop service
 
-#### Tags
+#### 🏷️ Tags
 
 All resources deployed by these templates are tagged with
 
@@ -162,7 +162,7 @@ All resources deployed by these templates are tagged with
 * `Owner` - this value an be whatever is required. Defined in `tags.json`
 * `Type` - this value is defined on the resource group values in `regions.json` and set specifically for some resources in the templates. The value should ideally not be changed, so that it can be used to query for specific resource types
 
-#### 1_main.bicep
+#### ❶ 1_main.bicep
 
 `1_main.bicep` defines an Azure Virtual Desktop deployment into a dedicated subscription, including:
 
@@ -175,17 +175,17 @@ All resources deployed by these templates are tagged with
 * Host pools and application groups to be created in the target regions
 * An AVD workspace per region
 
-#### 2_customImage.bicep
+#### ❷ 2_customImage.bicep
 
 `2_customImage.bicep` defines custom images to be created in the target regions. Images are defined in `regions.json` including whether images are enabled for that region with `"deployImages": true`.
 
 Not all regions support Azure Image Builder, see [Regions](https://learn.microsoft.com/en-us/azure/virtual-machines/image-builder-overview?tabs=azure-powershell#regions). You may need to create images in a region different to where AVD session hosts are deployed into. Ensure the `replicationRegions` in `regions.json` is defined with the target for replicated images.
 
-#### 4_sessionHosts.bicep
+#### ❹ 4_sessionHosts.bicep
 
 `4_sessionHosts.bicep` is used to deploy session hosts from a custom image. This template requires parameters to be set in the file - it does not read `regions.json`. If you're at this stage, you can use this Bicep template or Nerdio Manager to deploy session hosts.
 
-### Validate Deployment
+### 📋 Validate Deployment
 
 Validate what will be deployed with by running a `what-if` on the Bicep template (location is where the deployment will run, not necessarily where resources are deployed to):
 
@@ -193,7 +193,7 @@ Validate what will be deployed with by running a `what-if` on the Bicep template
 az deployment sub what-if --parameters upn=$Upn --location $Region --template-file ./1_main.bicep
 ```
 
-#### Deploy
+#### 🎬 Deploy
 
 When you're ready to deploy, use the Azure CLI `create` command:
 
@@ -201,7 +201,7 @@ When you're ready to deploy, use the Azure CLI `create` command:
 az deployment sub create --parameters upn=$Upn --location $Region --template-file ./1_main.bicep
 ```
 
-#### Subscription Permissions
+#### ♾ Subscription Permissions
 
 Assign the Azure Virtual Desktop application to the auto-scale role on the subscription - the following code will assign the Azure Virtual Desktop application directly (the assignee GUID is the Azure Virtual Desktop application which is the same )
 
@@ -212,9 +212,9 @@ az role assignment create `
     --scope "/subscriptions/$SubscriptionId"
 ```
 
-### Custom Images
+### 🌆 Custom Images
 
-#### Permissions
+#### ♾ Permissions
 
 Configure permissions for the managed identity before creating the custom image template: [Configure Azure VM Image Builder permissions by using the Azure CLI](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/image-builder-permissions-cli).
 
@@ -235,7 +235,7 @@ foreach ($Container in ("scripts", "configs", "binaries")) {
 }
 ```
 
-#### Network configuration
+#### 🛜 Network Configuration
 
 **Note**: this section can be skipped - the Bicep templates will configure image builds in an isolated vnet.
 
@@ -254,7 +254,7 @@ az network vnet subnet update `
   --private-link-service-network-policies Disabled
 ```
 
-#### Upload Scripts
+#### 📝 Upload Scripts
 
 **Note**: do not store secret values in scripts or configurations.
 
@@ -275,7 +275,7 @@ Once scripts and configs have been added to the storage account, update the scri
 
 **Note**: if scripts need to be updated, copy them into the images storage account, then delete the image template and re-deploy with `2_customImage.bicep`.
 
-#### Blob Access Level
+#### 🫙 Blob Access Level
 
 **Note**: do not store secret values in scripts or configurations. This access level is needed until authentication to the account can be used.
 
@@ -290,7 +290,7 @@ foreach ($Container in ("scripts", "configs", "binaries")) {
 }
 ```
 
-#### Custom image templates
+#### 🌆 Custom Image Templates
 
 Create the custom image templates defined in `regions.json`:
 
@@ -302,14 +302,14 @@ Custom images can be viewed from the resource group, or in the [Custom image tem
 
 **Note**: start the custom images from the Azure Virtual Desktop blade, otherwise Sysprep will not run at the end of the image build process.
 
-### Host Pools Storage Accounts
+### 🏊🏻‍♂️ Host Pools Storage Accounts
 
 Configure integration with Entra ID or AD DS authentication for authentication to storage accounts:
 
 - [Enable Active Directory Domain Services authentication for Azure file shares](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-identity-ad-ds-enable)
 - [Enable Microsoft Entra Kerberos authentication for hybrid identities on Azure Files](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-identity-auth-hybrid-identities-enable?tabs=azure-portal)
 
-### Deploy Session Hosts
+### ⏩ Deploy Session Hosts
 
 Create the host pool registration key - note that this command sets a lifetime of 72 hours (use a lifetime of no more than 168 hours):
 
@@ -359,11 +359,11 @@ Deploy session hosts into the host pool (update the target resource group):
 az deployment group create --parameters upn=$Upn --resource-group "rg-AvdHostPool01-australiaeast" --template-file ./4_sessionHosts.bicep
 ```
 
-#### Deployment Time Configuration
+#### 🕐 Deployment Time Configuration
 
 During deployment of session hosts, `SessionHostDeployment.ps1` will be run in each session host via the custom script extension. Review the code to see what that script does.
 
-#### Storage Account Keys
+#### 🔑 Storage Account Keys
 
 `SessionHostDeployment.ps1` will attempt to save credentials for the storage account used to host FSLogix Containers with `cmdkey`. This approach is only for cloud-only user identities and is not required for hybrid user accounts (storage accounts that are AD joined or Entra joined support user access via hybrid accounts).
 
@@ -379,9 +379,9 @@ az keyvault secret set --vault-name $KeyVault.name --name "storageAccountName-$H
 az keyvault secret set --vault-name $KeyVault.name --name "storageAccountKey-$HostPool" --value $Output[0].value
 ```
 
-## Clean up
+## 🧹 Clean Up
 
-### Logout
+### 🏌 Logout
 
 Logout of the target environment and clear cached accounts with the following commands. This ensures that your next deployment requires a login and you don't deploy into the incorrect environment:
 
@@ -390,7 +390,7 @@ az logout
 az account clear
 ```
 
-### Delete resources
+### ␡ Delete Resources
 
 If these templates are used for testing and you need to remove the deployment, the following Azure CLI commands can be used to delete the resource groups:
 
