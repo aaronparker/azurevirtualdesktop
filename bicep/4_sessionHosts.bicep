@@ -16,7 +16,7 @@ param sessionHostStartNumber int = 1
 param vmSize string = 'Standard_D4as_v5'
 
 param vmImageResourceGroup string = 'rg-Avd1Images-aue'
-param vmImageGalleryName string = 'galAvdImagesaustraliaeast'
+param vmImageGalleryName string = 'galAvd1Imagesaustraliaeast'
 param vmImageTemplate string = 'MicrosoftWindowsDesktop-Windows-11-win11-24h2-ent-en-au'
 param vmImageVersion string = 'latest'
 // param managedIdentity string = 'idAvdImagesaustraliaeast'
