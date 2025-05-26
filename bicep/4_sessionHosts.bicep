@@ -4,7 +4,7 @@ targetScope = 'resourceGroup'
 param managementResourceGroup string = 'rg-Avd1-Management-aue'
 param keyVault string = 'kv-Avd1-4f5fzzby72-aue'
 
-param virtualNetworkResourceGroup string = 'g-Avd1-Network-aue'
+param virtualNetworkResourceGroup string = 'rg-Avd1-Network-aue'
 param virtualNetworkName string = 'vnet-Avd1-HostPools-australiaeast'
 param subnetName string = 'Desktops1'
 
