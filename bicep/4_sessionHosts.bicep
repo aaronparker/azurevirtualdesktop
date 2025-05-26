@@ -1,24 +1,24 @@
 targetScope = 'resourceGroup'
 
 // Parameters to edit
-param managementResourceGroup string = 'rg-Avd-Management-australiaeast'
-param keyVault string = 'kv-Avd-gjij4ds7dbm4c-aue'
+param managementResourceGroup string = 'rg-Avd1-Management-aue'
+param keyVault string = 'kv-Avd1-4f5fzzby72-aue'
 
-param virtualNetworkResourceGroup string = 'rg-Avd-Network-australiaeast'
-param virtualNetworkName string = 'vnet-Avd-HostPools-australiaeast'
+param virtualNetworkResourceGroup string = 'g-Avd1-Network-aue'
+param virtualNetworkName string = 'vnet-Avd1-HostPools-australiaeast'
 param subnetName string = 'Desktops1'
 
 // param hostPoolResourceGroup string = 'rg-Avd-HostPool01-australiaeast'  <- target the resource group via the 'az deployment group' command
-param hostPoolName string = 'vdpool-Avd-HostPool01-Pooled-aue'
+param hostPoolName string = 'vdpool-Avd1-HostPool01-Personal-aue'
 param vmNamePrefix string = 'avd-aue-'
 param numberOfSessionHosts int = 1
 param sessionHostStartNumber int = 1
-param vmSize string = 'Standard_D2as_v5'
+param vmSize string = 'Standard_D4as_v5'
 
-param vmImageResourceGroup string = 'rg-Avd-Images-australiaeast'
+param vmImageResourceGroup string = 'rg-Avd1Images-aue'
 param vmImageGalleryName string = 'galAvdImagesaustraliaeast'
-param vmImageTemplate string = 'MicrosoftWindowsDesktop-Windows-11-win11-24h2-avd-en-au'
-param vmImageVersion string = '1.0.0'
+param vmImageTemplate string = 'MicrosoftWindowsDesktop-Windows-11-win11-24h2-ent-en-au'
+param vmImageVersion string = 'latest'
 // param managedIdentity string = 'idAvdImagesaustraliaeast'
 
 @description('The availability option for the VMs')
@@ -33,7 +33,7 @@ param availabilitySetName string = 'avail-AvdHostPool01-aue'
 param joinEntraID bool = true // Set to false to join AD
 param enrolIntune bool = true
 
-param customConfigurationScriptUrl string = 'https://stavgxxhpw2ptwuo5o.blob.${environment().suffixes.storage}/scripts/SessionHostDeployment.ps1'
+param customConfigurationScriptUrl string = 'https://stavddsplbxulhzmac.blob.${environment().suffixes.storage}/scripts/PersonalDesktopHostDeployment.ps1'
 
 // Don't touch these parameters
 param LastUpdateDate string = utcNow('yyyy-M-dd')

@@ -1,5 +1,5 @@
-$TenantId = "9a95621c-b347-40ab-ab83-707f98942280"
-$SubscriptionId = "27c99779-9397-4bd4-b7c0-2cde094b9646"
+$TenantId = "8a95621c-b347-40ab-ab83-707f98942280"
+$SubscriptionId = "8fc4c8ac-a2b8-4b39-9729-f1a5eeacbab5"
 az login --tenant $TenantId --use-device-code
 az account set --subscription $SubscriptionId
 
@@ -60,10 +60,11 @@ az keyvault secret set --vault-name $KeyVault.name --name "administratorAccountP
 az keyvault secret set --vault-name $KeyVault.name --name "ouPath" --value "OU=Azure Virtual Desktop,dc=domain,dc=local"
 az keyvault secret set --vault-name $KeyVault.name --name "domain" --value "domain"
 
-$HostPool = "vdpool-Avd-HostPool01-Pooled-aue"
+$HostPool = "vdpool-Avd1-HostPool01-Personal-aue"
+$HostPoolRg = "rg-Avd1-HostPool01-aue"
 $Output = az desktopvirtualization hostpool update `
     --name $HostPool `
-    --resource-group $ManagementRg.name `
+    --resource-group $HostPoolRg `
     --registration-info expiration-time=$((Get-Date).AddHours(72).ToString("yyyy-MM-ddTHH:mm:ss.fffK")) registration-token-operation="Update"
 az keyvault secret set --vault-name $KeyVault.name --name "hostPoolToken-$HostPool" --value $($Output | ConvertFrom-Json).registrationInfo.token
 
@@ -74,4 +75,4 @@ $Output = az storage account keys list --account-name $StorageAccount.name | Con
 az keyvault secret set --vault-name $KeyVault.name --name "storageAccountName-$HostPool" --value $StorageAccount.name
 az keyvault secret set --vault-name $KeyVault.name --name "storageAccountKey-$HostPool" --value $Output[0].value
 
-az deployment group create --parameters upn=$Upn --resource-group "rg-Avd-HostPool01-australiaeast" --template-file ./4_sessionhosts.bicep
+az deployment group create --parameters upn=$Upn --resource-group $HostPoolRg --template-file ./4_sessionhosts.bicep
