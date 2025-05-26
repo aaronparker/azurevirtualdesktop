@@ -21,7 +21,7 @@ param tags object
 @description('Combine the tags parameters into object specific tag values')
 param tagsUnion object = union (tags, {
   Application: resourceGroup().tags.Application
-  LastUpdateDate: utcNow('yyyy-M-dd')
+  LastUpdateDate: utcNow('yyyy-M-dd HH:mm:ss')
   Criticality: resourceGroup().tags.Criticality
   Function: resourceGroup().tags.Function
   Type: resourceGroup().tags.Type
@@ -29,7 +29,7 @@ param tagsUnion object = union (tags, {
 })
 
 @description('The date the gallery was last updated')
-param LastUpdateDate string = utcNow('yyyy-M-dd')
+param LastUpdateDate string = utcNow('yyyy-M-dd HH:mm:ss')
 
 
 // Create a managed identity to enable image builder access to target resource groups

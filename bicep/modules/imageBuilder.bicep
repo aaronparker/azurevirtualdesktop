@@ -45,7 +45,7 @@ param tags object
 
 @description('Combine the tags parameters into object specific tag values')
 param tagsUnion object = union (tags, {
-  LastUpdateDate: utcNow('yyyy-M-dd')
+  LastUpdateDate: utcNow('yyyy-M-dd HH:mm:ss')
 })
 
 resource computeGallery 'Microsoft.Compute/galleries@2024-03-03' existing = {

@@ -47,7 +47,7 @@ param tags object
 @description('Combine the tags parameters into object specific tag values')
 param tagsUnion object = union (tags, {
   Application: resourceGroup().tags.Application
-  LastUpdateDate: utcNow('yyyy-M-dd')
+  LastUpdateDate: utcNow('yyyy-M-dd HH:mm:ss')
   Criticality: resourceGroup().tags.Criticality
   Function: 'User profiles'
   Type: resourceGroup().tags.Type

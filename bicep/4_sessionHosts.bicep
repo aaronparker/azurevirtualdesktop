@@ -36,7 +36,7 @@ param enrolIntune bool = true
 param customConfigurationScriptUrl string = 'https://stavddsplbxulhzmac.blob.${environment().suffixes.storage}/scripts/PersonalDesktopHostDeployment.ps1'
 
 // Don't touch these parameters
-param LastUpdateDate string = utcNow('yyyy-M-dd')
+param LastUpdateDate string = utcNow('yyyy-M-dd HH:mm:ss HH:mm:ss')
 
 @description('The UPN of the user deploying the environment - must pass via the CLI')
 param upn string

@@ -13,7 +13,7 @@ param abbr object
 
 // Parameters that will be used in tags
 @description('Value to apply to the LastUpdateDate date tag on the object.')
-param LastUpdateDate string = utcNow('yyyy-M-dd')
+param LastUpdateDate string = utcNow('yyyy-M-dd HH:mm:ss')
 
 @description('Tags object to be combined with object specific tags')
 param tags object
