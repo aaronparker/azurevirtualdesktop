@@ -438,7 +438,7 @@ var privateDNSZoneName = 'privatelink.file.${environment().suffixes.storage}'
 
 // Create a network security group to apply to all subnets
 resource nsg 'Microsoft.Network/networkSecurityGroups@2024-05-01' = {
-  name: '${abbr.name}-${abbr.service}-${name}-${location}'
+  name: '${abbr.nsg}-${abbr.service}-${name}-${location}'
   location: location
   tags: tags
   properties: {

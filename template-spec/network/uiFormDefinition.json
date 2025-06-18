@@ -19,26 +19,12 @@
                             }
                         },
                         {
-                            "name": "date",
-                            "type": "Microsoft.Common.TextBox",
-                            "label": "Date",
-                            "subLabel": "",
-                            "defaultValue": "[[utcNow('yyyy-MM-dd')]",
-                            "toolTip": "The date and time the resources are being deployed",
-                            "constraints": {
-                                "required": false,
-                                "regex": "",
-                                "validationMessage": ""
-                            },
-                            "visible": false
-                        },
-                        {
                             "name": "email",
                             "type": "Microsoft.Common.TextBox",
                             "label": "Email",
                             "subLabel": "Enter your email address. This will be included in the Owner tag on the target resources.",
                             "defaultValue": "",
-                            "toolTip": "The email address of the user deploying the resources",
+                            "toolTip": "The email address of the user deploying the resources.",
                             "constraints": {
                                 "required": false,
                                 "regex": "",
@@ -47,24 +33,10 @@
                             "visible": true
                         },
                         {
-                            "name": "tags",
-                            "type": "Microsoft.Common.TextBox",
-                            "label": "Tags",
-                            "subLabel": "",
-                            "defaultValue": "{\"Application\":\"Azure Virtual Desktop\",\"Criticality\":\"Medium\",\"Environment\":\"Demo\",\"Function\":\"Azure Virtual Desktop session host network\",\"LastUpdateBy\":\"[parameters('email')]\",\"LastUpdateDate\":\"[parameters('date')]\",\"Type\":\"Network\"}",
-                            "toolTip": "Combine the tags parameters into object specific tag values",
-                            "constraints": {
-                                "required": false,
-                                "regex": "",
-                                "validationMessage": ""
-                            },
-                            "visible": false
-                        },
-                        {
                             "name": "service",
                             "type": "Microsoft.Common.TextBox",
-                            "label": "Service short name",
-                            "subLabel": "Enter a short name of the service being deployed. This will be used for abbreviations in resource names.",
+                            "label": "Short name",
+                            "subLabel": "Enter a short name of the service being deployed (e.g. Avd, W365, Svr). This will be used for abbreviations in resource names.",
                             "defaultValue": "Avd",
                             "toolTip": "Enter a short name of the service being deployed. This will be used for abbreviations in resource names.",
                             "constraints": {
@@ -83,88 +55,18 @@
                             "visible": true
                         },
                         {
-                            "name": "abbr",
-                            "type": "Microsoft.Common.TextBox",
-                            "label": "Abbr",
-                            "subLabel": "",
-                            "defaultValue": "{\"service\":\"[parameters('service')]\",\"appGroup\":\"vdag\",\"availSet\":\"avail\",\"computeGallery\":\"gal\",\"hostPool\":\"vdpool\",\"identity\":\"id\",\"imgTemplate\":\"it\",\"keyVault\":\"kv\",\"logAnalytics\":\"log\",\"natGateway\":\"ng\",\"network\":\"vnet\",\"networkManager\":\"vnm\",\"nsg\":\"nsg\",\"privateEndpoint\":\"pep\",\"privateLink\":\"pl\",\"publicIp\":\"pip\",\"resourceGroup\":\"rg\",\"routeTable\":\"rt\",\"scalingPlan\":\"vdscaling\",\"storage\":\"stavd\",\"subnet\":\"snet\",\"userRoute\":\"udr\",\"workspace\":\"vdws\"}",
-                            "toolTip": "Abbreviations for resource names to keep them short and within Azure limits",
-                            "constraints": {
-                                "required": false,
-                                "regex": "",
-                                "validationMessage": ""
-                            },
-                            "visible": false
-                        },
-                        {
                             "name": "name",
                             "type": "Microsoft.Common.TextBox",
                             "label": "Name",
-                            "subLabel": "",
+                            "subLabel": "The name of the service being deployed (e.g. HostPools, Windows365, Servers). This will be used for resource names.",
                             "defaultValue": "HostPools",
-                            "toolTip": "The name of the service being deployed",
+                            "toolTip": "The name of the service being deployed.",
                             "constraints": {
                                 "required": false,
                                 "regex": "",
                                 "validationMessage": ""
                             },
                             "visible": true
-                        },
-                        {
-                            "name": "addressSpace",
-                            "type": "Microsoft.Common.TextBox",
-                            "label": "Address Space",
-                            "subLabel": "The address space for the virtual network.",
-                            "defaultValue": "172.16.1.0/24",
-                            "toolTip": "The address space for the virtual network.",
-                            "constraints": {
-                                "required": false,
-                                "regex": "",
-                                "validationMessage": ""
-                            },
-                            "visible": false
-                        },
-                        {
-                            "name": "subnets",
-                            "type": "Microsoft.Common.TextBox",
-                            "label": "Subnets",
-                            "subLabel": "",
-                            "defaultValue": "[[{\"name\":\"Images\",\"subnetPrefix\":\"172.16.1.0/27\",\"privateLinkService\":\"Disabled\"},{\"name\":\"Storage\",\"subnetPrefix\":\"172.16.1.32/27\",\"privateLinkService\":\"Enabled\"},{\"name\":\"Management\",\"subnetPrefix\":\"172.16.1.64/27\",\"privateLinkService\":\"Enabled\"},{\"name\":\"Desktops1\",\"subnetPrefix\":\"172.16.1.96/27\",\"privateLinkService\":\"Enabled\"},{\"name\":\"Desktops2\",\"subnetPrefix\":\"172.16.1.128/27\",\"privateLinkService\":\"Enabled\"},{\"name\":\"Desktops3\",\"subnetPrefix\":\"172.16.1.160/27\",\"privateLinkService\":\"Enabled\"},{\"name\":\"Desktops4\",\"subnetPrefix\":\"172.16.1.192/27\",\"privateLinkService\":\"Enabled\"}]",
-                            "toolTip": "The subnets to be created in the virtual network",
-                            "constraints": {
-                                "required": false,
-                                "regex": "",
-                                "validationMessage": ""
-                            },
-                            "visible": false
-                        },
-                        {
-                            "name": "nsgRules",
-                            "type": "Microsoft.Common.TextBox",
-                            "label": "Nsg Rules",
-                            "subLabel": "",
-                            "defaultValue": "[[{\"name\":\"AllowImageProxyInbound\",\"properties\":{\"access\":\"Allow\",\"description\":\"Allow Image Builder Private Link Access to Proxy VM\",\"destinationAddressPrefix\":\"VirtualNetwork\",\"destinationAddressPrefixes\":[],\"destinationPortRange\":\"60000-60001\",\"destinationPortRanges\":[],\"direction\":\"Inbound\",\"priority\":100,\"protocol\":\"TCP\",\"sourceAddressPrefix\":\"AzureLoadBalancer\",\"sourceAddressPrefixes\":[],\"sourcePortRange\":\"*\",\"sourcePortRanges\":[]}},{\"name\":\"DenyAnySMTPOutbound\",\"properties\":{\"access\":\"Deny\",\"description\":\"Deny any SMTP outbound to the internet\",\"destinationAddressPrefix\":\"Internet\",\"destinationAddressPrefixes\":[],\"destinationPortRange\":\"25\",\"destinationPortRanges\":[],\"direction\":\"Outbound\",\"priority\":100,\"protocol\":\"TCP\",\"sourceAddressPrefix\":\"*\",\"sourceAddressPrefixes\":[],\"sourcePortRange\":\"*\",\"sourcePortRanges\":[]}},{\"name\":\"DenyAnySMTPSOutbound\",\"properties\":{\"access\":\"Deny\",\"description\":\"Deny any SMTPS outbound to the internet\",\"destinationAddressPrefix\":\"Internet\",\"destinationAddressPrefixes\":[],\"destinationPortRange\":\"465\",\"destinationPortRanges\":[],\"direction\":\"Outbound\",\"priority\":110,\"protocol\":\"TCP\",\"sourceAddressPrefix\":\"*\",\"sourceAddressPrefixes\":[],\"sourcePortRange\":\"*\",\"sourcePortRanges\":[]}},{\"name\":\"DenyAnyPOP3Outbound\",\"properties\":{\"access\":\"Deny\",\"description\":\"Deny any POP3 outbound to the internet\",\"destinationAddressPrefix\":\"Internet\",\"destinationAddressPrefixes\":[],\"destinationPortRange\":\"110\",\"destinationPortRanges\":[],\"direction\":\"Outbound\",\"priority\":120,\"protocol\":\"TCP\",\"sourceAddressPrefix\":\"*\",\"sourceAddressPrefixes\":[],\"sourcePortRange\":\"*\",\"sourcePortRanges\":[]}},{\"name\":\"DenyAnyPOP3SOutbound\",\"properties\":{\"access\":\"Deny\",\"description\":\"Deny any POP3S outbound to the internet\",\"destinationAddressPrefix\":\"Internet\",\"destinationAddressPrefixes\":[],\"destinationPortRange\":\"995\",\"destinationPortRanges\":[],\"direction\":\"Outbound\",\"priority\":130,\"protocol\":\"TCP\",\"sourceAddressPrefix\":\"*\",\"sourceAddressPrefixes\":[],\"sourcePortRange\":\"*\",\"sourcePortRanges\":[]}},{\"name\":\"DenyAnyIMAPOutbound\",\"properties\":{\"access\":\"Deny\",\"description\":\"Deny any IMAP outbound to the internet\",\"destinationAddressPrefix\":\"Internet\",\"destinationAddressPrefixes\":[],\"destinationPortRange\":\"143\",\"destinationPortRanges\":[],\"direction\":\"Outbound\",\"priority\":140,\"protocol\":\"TCP\",\"sourceAddressPrefix\":\"*\",\"sourceAddressPrefixes\":[],\"sourcePortRange\":\"*\",\"sourcePortRanges\":[]}},{\"name\":\"DenyAnyIMAPSOutbound\",\"properties\":{\"access\":\"Deny\",\"description\":\"Deny any IMAPS outbound to the internet\",\"destinationAddressPrefix\":\"Internet\",\"destinationAddressPrefixes\":[],\"destinationPortRange\":\"993\",\"destinationPortRanges\":[],\"direction\":\"Outbound\",\"priority\":150,\"protocol\":\"TCP\",\"sourceAddressPrefix\":\"*\",\"sourceAddressPrefixes\":[],\"sourcePortRange\":\"*\",\"sourcePortRanges\":[]}},{\"name\":\"DenyAnySMBOutbound\",\"properties\":{\"access\":\"Deny\",\"description\":\"Deny any SMB outbound to the internet\",\"destinationAddressPrefix\":\"Internet\",\"destinationAddressPrefixes\":[],\"destinationPortRange\":\"445\",\"destinationPortRanges\":[],\"direction\":\"Outbound\",\"priority\":160,\"protocol\":\"TCP\",\"sourceAddressPrefix\":\"*\",\"sourceAddressPrefixes\":[],\"sourcePortRange\":\"*\",\"sourcePortRanges\":[]}},{\"name\":\"DenyAnyNetBIOSNameResolutionOutbound\",\"properties\":{\"access\":\"Deny\",\"description\":\"Deny any NetBIOS name resolution outbound to the internet\",\"destinationAddressPrefix\":\"Internet\",\"destinationAddressPrefixes\":[],\"destinationPortRange\":\"137\",\"destinationPortRanges\":[],\"direction\":\"Outbound\",\"priority\":170,\"protocol\":\"UDP\",\"sourceAddressPrefix\":\"*\",\"sourceAddressPrefixes\":[],\"sourcePortRange\":\"*\",\"sourcePortRanges\":[]}},{\"name\":\"DenyAnyNetBIOSDatagramOutbound\",\"properties\":{\"access\":\"Deny\",\"description\":\"Deny any NetBIOS datagram service outbound to the internet\",\"destinationAddressPrefix\":\"Internet\",\"destinationAddressPrefixes\":[],\"destinationPortRange\":\"138\",\"destinationPortRanges\":[],\"direction\":\"Outbound\",\"priority\":180,\"protocol\":\"UDP\",\"sourceAddressPrefix\":\"*\",\"sourceAddressPrefixes\":[],\"sourcePortRange\":\"*\",\"sourcePortRanges\":[]}},{\"name\":\"DenyAnyNetBIOSSessionOutbound\",\"properties\":{\"access\":\"Deny\",\"description\":\"Deny any NetBIOS session service outbound to the internet\",\"destinationAddressPrefix\":\"Internet\",\"destinationAddressPrefixes\":[],\"destinationPortRange\":\"139\",\"destinationPortRanges\":[],\"direction\":\"Outbound\",\"priority\":190,\"protocol\":\"TCP\",\"sourceAddressPrefix\":\"*\",\"sourceAddressPrefixes\":[],\"sourcePortRange\":\"*\",\"sourcePortRanges\":[]}},{\"name\":\"DenyAnyTFTPOutbound\",\"properties\":{\"access\":\"Deny\",\"description\":\"Deny any Trivial File Transfer Protocol outbound to the internet\",\"destinationAddressPrefix\":\"Internet\",\"destinationAddressPrefixes\":[],\"destinationPortRange\":\"69\",\"destinationPortRanges\":[],\"direction\":\"Outbound\",\"priority\":200,\"protocol\":\"UDP\",\"sourceAddressPrefix\":\"*\",\"sourceAddressPrefixes\":[],\"sourcePortRange\":\"*\",\"sourcePortRanges\":[]}},{\"name\":\"DenyAnySysLogOutbound\",\"properties\":{\"access\":\"Deny\",\"description\":\"Deny any System Log outbound to the internet\",\"destinationAddressPrefix\":\"Internet\",\"destinationAddressPrefixes\":[],\"destinationPortRange\":\"514\",\"destinationPortRanges\":[],\"direction\":\"Outbound\",\"priority\":210,\"protocol\":\"UDP\",\"sourceAddressPrefix\":\"*\",\"sourceAddressPrefixes\":[],\"sourcePortRange\":\"*\",\"sourcePortRanges\":[]}},{\"name\":\"DenyAnySNMPOutbound\",\"properties\":{\"access\":\"Deny\",\"description\":\"Deny any Simple Network Management Protocol outbound to the internet\",\"destinationAddressPrefix\":\"Internet\",\"destinationAddressPrefixes\":[],\"destinationPortRange\":\"161-162\",\"destinationPortRanges\":[],\"direction\":\"Outbound\",\"priority\":220,\"protocol\":\"UDP\",\"sourceAddressPrefix\":\"*\",\"sourceAddressPrefixes\":[],\"sourcePortRange\":\"*\",\"sourcePortRanges\":[]}},{\"name\":\"DenyAnyIRCOutbound\",\"properties\":{\"access\":\"Deny\",\"description\":\"Deny any Internet Relay Chat outbound to the internet\",\"destinationAddressPrefix\":\"Internet\",\"destinationAddressPrefixes\":[],\"destinationPortRange\":\"6660-6669\",\"destinationPortRanges\":[],\"direction\":\"Outbound\",\"priority\":230,\"protocol\":\"TCP\",\"sourceAddressPrefix\":\"*\",\"sourceAddressPrefixes\":[],\"sourcePortRange\":\"*\",\"sourcePortRanges\":[]}},{\"name\":\"DenyAnyWinRMOutbound\",\"properties\":{\"access\":\"Deny\",\"description\":\"Deny any WinRM outbound to the internet\",\"destinationAddressPrefix\":\"Internet\",\"destinationAddressPrefixes\":[],\"destinationPortRange\":\"5986\",\"destinationPortRanges\":[],\"direction\":\"Outbound\",\"priority\":240,\"protocol\":\"TCP\",\"sourceAddressPrefix\":\"*\",\"sourceAddressPrefixes\":[],\"sourcePortRange\":\"*\",\"sourcePortRanges\":[]}}]",
-                            "toolTip": "Network security group rules to be applied to the NSG. Includes default outbound block rules for security.",
-                            "constraints": {
-                                "required": false,
-                                "regex": "",
-                                "validationMessage": ""
-                            },
-                            "visible": false
-                        },
-                        {
-                            "name": "dnsServers",
-                            "type": "Microsoft.Common.TextBox",
-                            "label": "Custom DNS servers",
-                            "subLabel": "",
-                            "defaultValue": "[[]",
-                            "toolTip": "DNS servers to be used in the virtual network. Default is empty array which uses Azure-provided DNS",
-                            "constraints": {
-                                "required": false,
-                                "regex": "",
-                                "validationMessage": ""
-                            },
-                            "visible": false
                         },
                         {
                             "name": "deployNatGateway",
