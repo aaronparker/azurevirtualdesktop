@@ -1,0 +1,6 @@
+{
+  "editor.formatOnSave": true,
+  "[bicep]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-bicep",
+  }
+}
