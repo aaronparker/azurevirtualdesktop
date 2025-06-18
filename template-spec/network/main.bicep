@@ -27,34 +27,34 @@ param tags object = {
 param service string = 'Avd'
 
 @description('Abbreviations for resource names to keep them short and within Azure limits')
-var abbr object = {
+param abbr object = {
   service: service
-  workspace: 'vdws'
-  hostPool: 'vdpool'
   appGroup: 'vdag'
-  scalingPlan: 'vdscaling'
-  resourceGroup: 'rg'
-  logAnalytics: 'log'
-  storage: 'stavd'
-  network: 'vnet'
-  subnet: 'snet'
-  nsg: 'nsg'
-  publicIp: 'pip'
-  natGateway: 'ng'
-  userRoute: 'udr'
-  routeTable: 'rt'
-  privateEndpoint: 'pep'
-  privateLink: 'pl'
-  networkManager: 'vnm'
+  availSet: 'avail'
   computeGallery: 'gal'
+  hostPool: 'vdpool'
   identity: 'id'
   imgTemplate: 'it'
-  availSet: 'avail'
   keyVault: 'kv'
+  logAnalytics: 'log'
+  natGateway: 'ng'
+  network: 'vnet'
+  networkManager: 'vnm'
+  nsg: 'nsg'
+  privateEndpoint: 'pep'
+  privateLink: 'pl'
+  publicIp: 'pip'
+  resourceGroup: 'rg'
+  routeTable: 'rt'
+  scalingPlan: 'vdscaling'
+  storage: 'stavd'
+  subnet: 'snet'
+  userRoute: 'udr'
+  workspace: 'vdws'
 }
 
 @description('The name of the service being deployed')
-var name = 'HostPools'
+param name string = 'HostPools'
 
 @description('The address space for the virtual network')
 param addressSpace string = '172.16.1.0/24'
@@ -437,8 +437,8 @@ var serviceEndpoints = [
 var privateDNSZoneName = 'privatelink.file.${environment().suffixes.storage}'
 
 // Create a network security group to apply to all subnets
-resource nsg 'Microsoft.Network/networkSecurityGroups@2024-07-01' = {
-  name: '${abbr.nsg}-${abbr.service}-${name}-${location}'
+resource nsg 'Microsoft.Network/networkSecurityGroups@2024-05-01' = {
+  name: '${abbr.name}-${abbr.service}-${name}-${location}'
   location: location
   tags: tags
   properties: {
@@ -480,7 +480,7 @@ resource natGateway 'Microsoft.Network/natGateways@2024-05-01' = if (deployNatGa
 }
 
 // Create the virtual network and subnets, assigning the NSG to all subnets, and assign the NAT gateway
-resource vnet 'Microsoft.Network/virtualNetworks@2024-07-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
   name: '${abbr.network}-${abbr.service}-${name}-${location}'
   location: location
   tags: tags
@@ -534,7 +534,7 @@ resource privateDNSZone 'Microsoft.Network/privateDnsZones@2024-06-01' = {
 }
 
 // Create a route table
-resource routeTable 'Microsoft.Network/routeTables@2024-07-01' = {
+resource routeTable 'Microsoft.Network/routeTables@2024-05-01' = {
   name: '${abbr.routeTable}-${abbr.service}-${name}-${location}-01'
   location: location
   tags: tags
