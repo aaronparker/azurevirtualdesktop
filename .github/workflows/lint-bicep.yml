@@ -6,6 +6,7 @@ on:
   push:
     paths:
     - "bicep/**"
+    - "template-spec/**"
     - ".github/pipelines/lint-bicep.yml"
 
 permissions:
