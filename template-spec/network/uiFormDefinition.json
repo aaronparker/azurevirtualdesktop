@@ -1,6 +1,5 @@
 {
-    "__internal__skipValidation": true,
-    "$schema": "<relative path to dx.schema.json>",
+    "$schema": "https://schema.management.azure.com/schemas/2021-09-09/uiFormDefinition.schema.json",
     "view": {
         "kind": "Form",
         "properties": {
@@ -29,12 +28,9 @@
                             "constraints": {
                                 "required": false,
                                 "regex": "",
-                                "validationMessage": "",
-                                "validations": []
+                                "validationMessage": ""
                             },
-                            "infoMessages": [],
-                            "visible": false,
-                            "resourceTypeMetadata": []
+                            "visible": false
                         },
                         {
                             "name": "email",
@@ -46,12 +42,9 @@
                             "constraints": {
                                 "required": false,
                                 "regex": "",
-                                "validationMessage": "",
-                                "validations": []
+                                "validationMessage": ""
                             },
-                            "infoMessages": [],
-                            "visible": true,
-                            "resourceTypeMetadata": []
+                            "visible": true
                         },
                         {
                             "name": "tags",
@@ -63,12 +56,9 @@
                             "constraints": {
                                 "required": false,
                                 "regex": "",
-                                "validationMessage": "",
-                                "validations": []
+                                "validationMessage": ""
                             },
-                            "infoMessages": [],
-                            "visible": false,
-                            "resourceTypeMetadata": []
+                            "visible": false
                         },
                         {
                             "name": "service",
@@ -79,8 +69,6 @@
                             "toolTip": "The name of the service being deployed, used for abbreviations in resource names",
                             "constraints": {
                                 "required": false,
-                                "regex": "",
-                                "validationMessage": "",
                                 "validations": [
                                     {
                                         "isValid": "[or(or(empty(steps('basics').service),and(not(startsWith(steps('basics').service,'[[')),startsWith(steps('basics').service,'['),endsWith(steps('basics').service,']'),greater(indexOf(steps('basics').service,'('),-1),greater(indexOf(steps('basics').service,')'),-1))),greaterOrEquals(length(steps('basics').service),2))]",
@@ -92,9 +80,7 @@
                                     }
                                 ]
                             },
-                            "infoMessages": [],
-                            "visible": true,
-                            "resourceTypeMetadata": []
+                            "visible": true
                         },
                         {
                             "name": "abbr",
@@ -106,12 +92,9 @@
                             "constraints": {
                                 "required": false,
                                 "regex": "",
-                                "validationMessage": "",
-                                "validations": []
+                                "validationMessage": ""
                             },
-                            "infoMessages": [],
-                            "visible": false,
-                            "resourceTypeMetadata": []
+                            "visible": false
                         },
                         {
                             "name": "name",
@@ -123,10 +106,8 @@
                             "constraints": {
                                 "required": false,
                                 "regex": "",
-                                "validationMessage": "",
-                                "validations": []
+                                "validationMessage": ""
                             },
-                            "infoMessages": [],
                             "visible": true
                         },
                         {
@@ -139,12 +120,9 @@
                             "constraints": {
                                 "required": false,
                                 "regex": "",
-                                "validationMessage": "",
-                                "validations": []
+                                "validationMessage": ""
                             },
-                            "infoMessages": [],
-                            "visible": false,
-                            "resourceTypeMetadata": []
+                            "visible": false
                         },
                         {
                             "name": "subnets",
@@ -156,12 +134,9 @@
                             "constraints": {
                                 "required": false,
                                 "regex": "",
-                                "validationMessage": "",
-                                "validations": []
+                                "validationMessage": ""
                             },
-                            "infoMessages": [],
-                            "visible": false,
-                            "resourceTypeMetadata": []
+                            "visible": false
                         },
                         {
                             "name": "nsgRules",
@@ -173,12 +148,9 @@
                             "constraints": {
                                 "required": false,
                                 "regex": "",
-                                "validationMessage": "",
-                                "validations": []
+                                "validationMessage": ""
                             },
-                            "infoMessages": [],
-                            "visible": false,
-                            "resourceTypeMetadata": []
+                            "visible": false
                         },
                         {
                             "name": "dnsServers",
@@ -190,18 +162,14 @@
                             "constraints": {
                                 "required": false,
                                 "regex": "",
-                                "validationMessage": "",
-                                "validations": []
+                                "validationMessage": ""
                             },
-                            "infoMessages": [],
-                            "visible": true,
-                            "resourceTypeMetadata": []
+                            "visible": true
                         },
                         {
                             "name": "deployNatGateway",
                             "type": "Microsoft.Common.DropDown",
                             "label": "Deploy NAT Gateway?",
-                            "subLabel": "",
                             "defaultValue": "true",
                             "toolTip": "Whether to deploy a NAT gateway for the virtual network. Default is true.",
                             "constraints": {
@@ -215,26 +183,13 @@
                                         "label": "false",
                                         "value": false
                                     }
-                                ],
-                                "validations": []
+                                ]
                             },
-                            "infoMessages": [],
-                            "visible": true,
-                            "resourceTypeMetadata": []
+                            "visible": true
                         }
                     ]
                 }
-            ],
-            "deployment": {
-                "kind": "ResourceGroup",
-                "parameters": {
-                    "_dxContentPath": "view.properties.deployment.parameters"
-                },
-                "template": {},
-                "_dxContentPath": "view.properties.deployment"
-            },
-            "_dxContentPath": "view.properties"
-        },
-        "_dxContentPath": "view"
+            ]
+        }
     }
 }
