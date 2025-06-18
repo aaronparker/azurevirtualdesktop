@@ -36,8 +36,8 @@
                             "name": "email",
                             "type": "Microsoft.Common.TextBox",
                             "label": "Email",
-                            "subLabel": "Enter your email address - this will be included in the Owner tag on the target resources.",
-                            "defaultValue": "name@company.com",
+                            "subLabel": "Enter your email address. This will be included in the Owner tag on the target resources.",
+                            "defaultValue": "",
                             "toolTip": "The email address of the user deploying the resources",
                             "constraints": {
                                 "required": false,
@@ -63,10 +63,10 @@
                         {
                             "name": "service",
                             "type": "Microsoft.Common.TextBox",
-                            "label": "Service name",
-                            "subLabel": "",
+                            "label": "Service short name",
+                            "subLabel": "Enter a short name of the service being deployed. This will be used for abbreviations in resource names.",
                             "defaultValue": "Avd",
-                            "toolTip": "The name of the service being deployed, used for abbreviations in resource names",
+                            "toolTip": "Enter a short name of the service being deployed. This will be used for abbreviations in resource names.",
                             "constraints": {
                                 "required": false,
                                 "validations": [
@@ -114,9 +114,9 @@
                             "name": "addressSpace",
                             "type": "Microsoft.Common.TextBox",
                             "label": "Address Space",
-                            "subLabel": "",
+                            "subLabel": "The address space for the virtual network.",
                             "defaultValue": "172.16.1.0/24",
-                            "toolTip": "The address space for the virtual network",
+                            "toolTip": "The address space for the virtual network.",
                             "constraints": {
                                 "required": false,
                                 "regex": "",
@@ -164,14 +164,14 @@
                                 "regex": "",
                                 "validationMessage": ""
                             },
-                            "visible": true
+                            "visible": false
                         },
                         {
                             "name": "deployNatGateway",
                             "type": "Microsoft.Common.DropDown",
                             "label": "Deploy NAT Gateway?",
                             "defaultValue": "true",
-                            "toolTip": "Whether to deploy a NAT gateway for the virtual network. Default is true.",
+                            "toolTip": "A NAT gateway is required from September 2025. Default is true.",
                             "constraints": {
                                 "required": false,
                                 "allowedValues": [
