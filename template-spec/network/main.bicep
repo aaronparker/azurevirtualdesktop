@@ -1,32 +1,35 @@
 // Target the resource group to deploy network resources into
 targetScope = 'resourceGroup'
 
-@description('The region or location the network resources will be deployed into')
+@description('The region or location the network resources will be deployed into.')
 var location = resourceGroup().location
 
-@description('The date and time the resources are being deployed')
-param date string = utcNow('yyyy-MM-dd')
+@description('The date and time the resources are being deployed.')
+param date string = utcNow('yyyy-MM-dd HH:mm:ss')
 
-@description('The email address of the user deploying the resources')
-param email string = 'name@company.com'
+@description('Enter your email address. This will be included in the Owner tag on the target resources.')
+param email string
 
-@description('Combine the tags parameters into object specific tag values')
+@description('Whether to deploy a NAT gateway for the virtual network. Default is true.')
+param deployNatGateway bool
+
+@description('Tags to be applied to all resources created by this template.')
 param tags object = {
   Application: 'Azure Virtual Desktop'
   Criticality: 'Medium'
   Environment: 'Demo'
-  Function: 'Azure Virtual Desktop session host network'
+  Function: 'Azure Virtual Desktop session host network.'
   LastUpdateBy: email
   LastUpdateDate: date
   Type: 'Network'
 }
 
-@description('The name of the service being deployed, used for abbreviations in resource names')
+@description('The name of the service being deployed, used for abbreviations in resource names.')
 @maxLength(4)
 @minLength(2)
 param service string = 'Avd'
 
-@description('Abbreviations for resource names to keep them short and within Azure limits')
+@description('Abbreviations for resource names to keep them short and within Azure limits.')
 param abbr object = {
   service: service
   appGroup: 'vdag'
@@ -53,13 +56,13 @@ param abbr object = {
   workspace: 'vdws'
 }
 
-@description('The name of the service being deployed')
+@description('The name of the service being deployed (e.g. HostPools, Windows365, Servers). This will be used for resource names.')
 param name string = 'HostPools'
 
-@description('The address space for the virtual network')
+@description('The address space for the virtual network.')
 param addressSpace string = '172.16.1.0/24'
 
-@description('The subnets to be created in the virtual network')
+@description('The subnets to be created in the virtual network.')
 param subnets array = [
   {
     name: 'Images'
@@ -390,11 +393,8 @@ param nsgRules array = [
   }
 ]
 
-@description('DNS servers to be used in the virtual network. Default is empty array which uses Azure-provided DNS')
+@description('DNS servers to be used in the virtual network. Default is empty array which uses Azure-provided DNS.')
 param dnsServers array = []
-
-@description('Whether to deploy a NAT gateway for the virtual network. Default is true.')
-param deployNatGateway bool = true
 
 // Build a variable for NSG security rules
 @description('Build the array of security rules from nsgRules.')

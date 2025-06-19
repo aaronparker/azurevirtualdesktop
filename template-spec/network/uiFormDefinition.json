@@ -26,43 +26,7 @@
                             "defaultValue": "",
                             "toolTip": "The email address of the user deploying the resources.",
                             "constraints": {
-                                "required": false,
-                                "regex": "",
-                                "validationMessage": ""
-                            },
-                            "visible": true
-                        },
-                        {
-                            "name": "service",
-                            "type": "Microsoft.Common.TextBox",
-                            "label": "Short name",
-                            "subLabel": "Enter a short name of the service being deployed (e.g. Avd, W365, Svr). This will be used for abbreviations in resource names.",
-                            "defaultValue": "Avd",
-                            "toolTip": "Enter a short name of the service being deployed. This will be used for abbreviations in resource names.",
-                            "constraints": {
-                                "required": false,
-                                "validations": [
-                                    {
-                                        "isValid": "[or(or(empty(steps('basics').service),and(not(startsWith(steps('basics').service,'[[')),startsWith(steps('basics').service,'['),endsWith(steps('basics').service,']'),greater(indexOf(steps('basics').service,'('),-1),greater(indexOf(steps('basics').service,')'),-1))),greaterOrEquals(length(steps('basics').service),2))]",
-                                        "message": "The value must have a length of at least 2."
-                                    },
-                                    {
-                                        "isValid": "[or(or(empty(steps('basics').service),and(not(startsWith(steps('basics').service,'[[')),startsWith(steps('basics').service,'['),endsWith(steps('basics').service,']'),greater(indexOf(steps('basics').service,'('),-1),greater(indexOf(steps('basics').service,')'),-1))),lessOrEquals(length(steps('basics').service),4))]",
-                                        "message": "The value must have a length of at most 4."
-                                    }
-                                ]
-                            },
-                            "visible": true
-                        },
-                        {
-                            "name": "name",
-                            "type": "Microsoft.Common.TextBox",
-                            "label": "Name",
-                            "subLabel": "The name of the service being deployed (e.g. HostPools, Windows365, Servers). This will be used for resource names.",
-                            "defaultValue": "HostPools",
-                            "toolTip": "The name of the service being deployed.",
-                            "constraints": {
-                                "required": false,
+                                "required": true,
                                 "regex": "",
                                 "validationMessage": ""
                             },
@@ -75,14 +39,14 @@
                             "defaultValue": "true",
                             "toolTip": "A NAT gateway is required from September 2025. Default is true.",
                             "constraints": {
-                                "required": false,
+                                "required": true,
                                 "allowedValues": [
                                     {
-                                        "label": "true",
+                                        "label": "Create a NAT gateway",
                                         "value": true
                                     },
                                     {
-                                        "label": "false",
+                                        "label": "Do not create a NAT gateway",
                                         "value": false
                                     }
                                 ]
@@ -95,7 +59,9 @@
         },
         "outputs": {
             "parameters": {
-                "location": "[steps('basics').resourceScope.location.name]"
+                "location": "[steps('basics').resourceScope.location.name]",
+                "email": "[steps('basics').email]",
+                "deployNatGateway": "[steps('basics').deployNatGateway]"
             },
             "kind": "ResourceGroup",
             "location": "[steps('basics').resourceScope.location.name]",
