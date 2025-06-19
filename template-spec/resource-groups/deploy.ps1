@@ -1,8 +1,8 @@
-$Location = "australiaeast"
+$Location = "westus2"
 $Date = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
 $Tags = @{
     Application    = "Azure Virtual Desktop"
-    LastUpdateBy   = "aaronparker@cloud.stealthpuppy.com"
+    LastUpdateBy   = $((Get-AzContext).Account.Id)
     LastUpdateDate = $Date
     Criticality    = "Medium"
     Environment    = "Production"
@@ -10,8 +10,8 @@ $Tags = @{
 }
 
 $params = @{
-    ResourceGroupName    = "rg-Dev-TemplateSpecs-aue"
-    Name                 = "New-ResourceGroups"
+    ResourceGroupName    = "rg-Prod-TemplateSpecs-wus2"
+    Name                 = "New-AvdResourceGroups"
     DisplayName          = "Create a set of resource groups"
     Description          = "Create a set of resource groups for use with Nerdio Manager and Azure Virtual Desktop."
     Version              = "1.0.5"
