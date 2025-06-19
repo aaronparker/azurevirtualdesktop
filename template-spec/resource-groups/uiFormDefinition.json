@@ -3,7 +3,7 @@
     "view": {
         "kind": "Form",
         "properties": {
-            "title": "Test Form View",
+            "title": "New Region Resource Groups",
             "steps": [
                 {
                     "name": "basics",
@@ -20,9 +20,13 @@
                                     "eastus",
                                     "westus2",
                                     "westus3",
+                                    "centralus",
+                                    "southcentralus",
+                                    "brazilsouth",
                                     "australiaeast",
                                     "australiasoutheast",
-                                    "uksouth"
+                                    "uksouth",
+                                    "southindia"
                                 ]
                             }
                         },
