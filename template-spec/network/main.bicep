@@ -506,7 +506,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
           networkSecurityGroup: {
             id: nsg.id
           }
-          natGateway: ((deployNatGateway) ? { id: natGateway.id } : null)
+          natGateway: ((deployNatGateway && subnet.name != 'GatewaySubnet') ? { id: natGateway.id } : null)
           defaultOutboundAccess: ((deployNatGateway) ? true : false)
           serviceEndpoints: serviceEndpoints
           delegations: []
