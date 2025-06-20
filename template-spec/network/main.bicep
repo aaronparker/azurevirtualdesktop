@@ -71,37 +71,37 @@ param subnets array = [
   }
   {
     name: 'Storage'
-    subnetPrefix: '10.1.0.0/24'
+    subnetPrefix: '10.0.1.0/24'
     privateLinkService: 'Enabled'
   }
   {
     name: 'Images'
-    subnetPrefix: '10.2.0.0/23'
+    subnetPrefix: '10.0.2.0/23'
     privateLinkService: 'Disabled'
   }
   {
     name: 'Management'
-    subnetPrefix: '10.4.0.0/23'
+    subnetPrefix: '10.0.4.0/23'
     privateLinkService: 'Enabled'
   }
   {
     name: 'Desktops1'
-    subnetPrefix: '10.6.0.0/23'
+    subnetPrefix: '10.0.6.0/23'
     privateLinkService: 'Enabled'
   }
   {
     name: 'Desktops2'
-    subnetPrefix: '10.8.0.0/23'
+    subnetPrefix: '10.0.8.0/23'
     privateLinkService: 'Enabled'
   }
   {
     name: 'Desktops3'
-    subnetPrefix: '10.10.0.0/23'
+    subnetPrefix: '10.0.10.0/23'
     privateLinkService: 'Enabled'
   }
   {
     name: 'Desktops4'
-    subnetPrefix: '10.12.0.0/23'
+    subnetPrefix: '10.0.12.0/23'
     privateLinkService: 'Enabled'
   }
 ]
