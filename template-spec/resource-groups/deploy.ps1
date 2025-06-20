@@ -1,3 +1,5 @@
+#Requires -Module Az.Resources, Az.Accounts
+
 $Location = "westus2"
 $Date = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
 $Tags = @{
