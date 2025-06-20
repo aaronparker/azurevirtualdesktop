@@ -505,7 +505,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
           addressPrefix: subnet.subnetPrefix
           networkSecurityGroup: ((subnet.name != 'GatewaySubnet') ? { id: nsg.id } : null)
           natGateway: ((deployNatGateway && subnet.name != 'GatewaySubnet') ? { id: natGateway.id } : null)
-          defaultOutboundAccess: ((deployNatGateway) ? true : false)
+          defaultOutboundAccess: ((deployNatGateway) ? false : true)
           serviceEndpoints: serviceEndpoints
           delegations: []
           //privateEndpointNetworkPolicies: 'Disabled'
