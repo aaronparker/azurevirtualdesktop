@@ -60,43 +60,48 @@ param abbr object = {
 param name string = 'HostPools'
 
 @description('The address space for the virtual network.')
-param addressSpace string = '172.16.1.0/24'
+param addressSpace string = '10.0.0.0/16'
 
 @description('The subnets to be created in the virtual network.')
 param subnets array = [
   {
-    name: 'Images'
-    subnetPrefix: '172.16.1.0/27'
+    name: 'GatewaySubnet'
+    subnetPrefix: '10.0.0.0/27'
     privateLinkService: 'Disabled'
   }
   {
     name: 'Storage'
-    subnetPrefix: '172.16.1.32/27'
+    subnetPrefix: '10.1.0.0/24'
     privateLinkService: 'Enabled'
   }
   {
+    name: 'Images'
+    subnetPrefix: '10.2.0.0/23'
+    privateLinkService: 'Disabled'
+  }
+  {
     name: 'Management'
-    subnetPrefix: '172.16.1.64/27'
+    subnetPrefix: '10.4.0.0/23'
     privateLinkService: 'Enabled'
   }
   {
     name: 'Desktops1'
-    subnetPrefix: '172.16.1.96/27'
+    subnetPrefix: '10.6.0.0/23'
     privateLinkService: 'Enabled'
   }
   {
     name: 'Desktops2'
-    subnetPrefix: '172.16.1.128/27'
+    subnetPrefix: '10.8.0.0/23'
     privateLinkService: 'Enabled'
   }
   {
     name: 'Desktops3'
-    subnetPrefix: '172.16.1.160/27'
+    subnetPrefix: '10.10.0.0/23'
     privateLinkService: 'Enabled'
   }
   {
     name: 'Desktops4'
-    subnetPrefix: '172.16.1.192/27'
+    subnetPrefix: '10.12.0.0/23'
     privateLinkService: 'Enabled'
   }
 ]
@@ -502,9 +507,9 @@ resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
             id: nsg.id
           }
           natGateway: ((deployNatGateway) ? { id: natGateway.id } : null)
+          defaultOutboundAccess: ((deployNatGateway) ? true : false)
           serviceEndpoints: serviceEndpoints
           delegations: []
-          // defaultOutboundAccess: true
           //privateEndpointNetworkPolicies: 'Disabled'
           privateLinkServiceNetworkPolicies: subnet.privateLinkService
         }
