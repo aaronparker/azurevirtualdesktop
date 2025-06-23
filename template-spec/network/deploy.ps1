@@ -1,6 +1,6 @@
 #Requires -Module Az.Resources, Az.Accounts
 
-$Location = "westus2"
+$Location = "australiaeast"
 $Date = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
 $Tags = @{
     Application    = "Azure Virtual Desktop"
@@ -12,7 +12,7 @@ $Tags = @{
 }
 
 $params = @{
-    ResourceGroupName    = "rg-Prod-TemplateSpecs-wus2"
+    ResourceGroupName    = "rg-Dev-TemplateSpecs-aue"
     Name                 = "New-VirtualNetwork"
     DisplayName          = "Create a new AVD virtual network"
     Description          = "Create a virtual network with subnets, an NSG and a NAT gateway to support AVD and Windows 365."

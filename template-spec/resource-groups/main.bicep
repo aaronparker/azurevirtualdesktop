@@ -5,7 +5,7 @@ targetScope = 'subscription'
 param location string
 
 @description('The list of allowed regions to create resource groups in.')
-var regions object = {
+var regions = {
   eastus: 'eus'
   westus2: 'wus2'
   westus3: 'wus3'
@@ -19,7 +19,7 @@ var regions object = {
 }
 
 @description('The list of resource groups to create for the Azure Virtual Desktop deployment.')
-var resourceGroups array = [
+var resourceGroups = [
   {
     name: 'host-pool01'
     description: 'Azure Virtual Desktop host pool resources.'

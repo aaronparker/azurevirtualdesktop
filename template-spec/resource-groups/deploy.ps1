@@ -1,6 +1,6 @@
 #Requires -Module Az.Resources, Az.Accounts
 
-$Location = "westus2"
+$Location = "australiaeast"
 $Date = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
 $Tags = @{
     Application    = "Azure Virtual Desktop"
@@ -12,7 +12,7 @@ $Tags = @{
 }
 
 $params = @{
-    ResourceGroupName    = "rg-Prod-TemplateSpecs-wus2"
+    ResourceGroupName    = "rg-Dev-TemplateSpecs-aue"
     Name                 = "New-AvdResourceGroups"
     DisplayName          = "Create AVD resource groups"
     Description          = "Create a set of resource groups for use with Nerdio Manager and Azure Virtual Desktop."
