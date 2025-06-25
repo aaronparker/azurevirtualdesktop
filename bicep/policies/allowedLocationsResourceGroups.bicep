@@ -20,7 +20,7 @@ param listOfAllowedLocations array = [
   'southindia'
 ]
 
-resource policyAssignment 'Microsoft.Authorization/policyAssignments@2025-03-01' = {
+resource policyAssignment 'Microsoft.Authorization/policyAssignments@2025-01-01' = {
   name: 'allowed-locations-resource-groups'
   properties: {
     displayName: policyDisplayName

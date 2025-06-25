@@ -3,7 +3,7 @@ targetScope = 'subscription'
 @description('The display name of the policy.')
 param policyDisplayName string = 'Enforce Resource Group Naming Convention'
 
-resource policyDefinition 'Microsoft.Authorization/policyDefinitions@2025-03-01' = {
+resource policyDefinition 'Microsoft.Authorization/policyDefinitions@2025-01-01' = {
   name: 'enforce-rg-naming-convention'
   properties: {
     displayName: policyDisplayName
@@ -37,7 +37,7 @@ resource policyDefinition 'Microsoft.Authorization/policyDefinitions@2025-03-01'
   }
 }
 
-resource policyAssignment 'Microsoft.Authorization/policyAssignments@2025-03-01' = {
+resource policyAssignment 'Microsoft.Authorization/policyAssignments@2025-01-01' = {
   name: 'enforce-rg-naming-convention-assignment'
   properties: {
     displayName: policyDisplayName

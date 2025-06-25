@@ -3,7 +3,7 @@ targetScope = 'subscription'
 @description('The display name of the policy.')
 param policyDisplayName string = 'Require and validate specific tags on all resource groups'
 
-resource tagPolicy 'Microsoft.Authorization/policyDefinitions@2025-03-01' = {
+resource tagPolicy 'Microsoft.Authorization/policyDefinitions@2025-01-01' = {
   name: 'enforce-required-tags-on-rgs'
   properties: {
     policyType: 'Custom'
@@ -84,7 +84,7 @@ resource tagPolicy 'Microsoft.Authorization/policyDefinitions@2025-03-01' = {
   }
 }
 
-resource tagPolicyAssignment 'Microsoft.Authorization/policyAssignments@2025-03-01' = {
+resource tagPolicyAssignment 'Microsoft.Authorization/policyAssignments@2025-01-01' = {
   name: 'enforce-required-tags-on-rgs-assignment'
   properties: {
     displayName: policyDisplayName
