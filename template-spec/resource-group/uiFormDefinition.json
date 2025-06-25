@@ -1,0 +1,276 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2021-09-09/uiFormDefinition.schema.json",
+    "view": {
+        "kind": "Form",
+        "properties": {
+            "title": "Create a single resource group",
+            "steps": [
+                {
+                    "name": "basics",
+                    "label": "Basics",
+                    "elements": [
+                        {
+                            "name": "resourceScope",
+                            "type": "Microsoft.Common.ResourceScope",
+                            "location": {
+                                "resourceTypes": [
+                                    "microsoft.resources/subscriptions"
+                                ],
+                                "allowedValues": [
+                                    "eastus",
+                                    "westus2",
+                                    "westus3",
+                                    "centralus",
+                                    "southcentralus",
+                                    "brazilsouth",
+                                    "australiaeast",
+                                    "australiasoutheast",
+                                    "uksouth",
+                                    "southindia"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "location",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Location",
+                            "defaultValue": " ",
+                            "toolTip": "The region or location the resource group will be deployed into.",
+                            "constraints": {
+                                "required": true,
+                                "allowedValues": [
+                                    {
+                                        "label": "eastus",
+                                        "value": "eastus"
+                                    },
+                                    {
+                                        "label": "westus2",
+                                        "value": "westus2"
+                                    },
+                                    {
+                                        "label": "westus3",
+                                        "value": "westus3"
+                                    },
+                                    {
+                                        "label": "centralus",
+                                        "value": "centralus"
+                                    },
+                                    {
+                                        "label": "southcentralus",
+                                        "value": "southcentralus"
+                                    },
+                                    {
+                                        "label": "brazilsouth",
+                                        "value": "brazilsouth"
+                                    },
+                                    {
+                                        "label": "australiaeast",
+                                        "value": "australiaeast"
+                                    },
+                                    {
+                                        "label": "australiasoutheast",
+                                        "value": "australiasoutheast"
+                                    },
+                                    {
+                                        "label": "uksouth",
+                                        "value": "uksouth"
+                                    },
+                                    {
+                                        "label": "southindia",
+                                        "value": "southindia"
+                                    }
+                                ]
+                            },
+                            "visible": false
+                        },
+                        {
+                            "name": "email",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Email",
+                            "subLabel": "",
+                            "defaultValue": "",
+                            "toolTip": "Enter your email address. This will be included in the Owner tag on the target resources.",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": ""
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "service",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Service",
+                            "subLabel": "",
+                            "defaultValue": "avd",
+                            "toolTip": "A short name of the service being deployed, used for abbreviations in resource names.",
+                            "constraints": {
+                                "required": false,
+                                "validations": [
+                                    {
+                                        "isValid": "[or(or(empty(steps('basics').service),and(not(startsWith(steps('basics').service,'[[')),startsWith(steps('basics').service,'['),endsWith(steps('basics').service,']'),greater(indexOf(steps('basics').service,'('),-1),greater(indexOf(steps('basics').service,')'),-1))),greaterOrEquals(length(steps('basics').service),2))]",
+                                        "message": "The value must have a length of at least 2."
+                                    },
+                                    {
+                                        "isValid": "[or(or(empty(steps('basics').service),and(not(startsWith(steps('basics').service,'[[')),startsWith(steps('basics').service,'['),endsWith(steps('basics').service,']'),greater(indexOf(steps('basics').service,'('),-1),greater(indexOf(steps('basics').service,')'),-1))),lessOrEquals(length(steps('basics').service),4))]",
+                                        "message": "The value must have a length of at most 4."
+                                    }
+                                ]
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Name",
+                            "subLabel": "",
+                            "defaultValue": "resources",
+                            "toolTip": ".",
+                            "constraints": {
+                                "required": false,
+                                "validations": [
+                                    {
+                                        "isValid": "[or(or(empty(steps('basics').name),and(not(startsWith(steps('basics').name,'[[')),startsWith(steps('basics').name,'['),endsWith(steps('basics').name,']'),greater(indexOf(steps('basics').name,'('),-1),greater(indexOf(steps('basics').name,')'),-1))),greaterOrEquals(length(steps('basics').name),4))]",
+                                        "message": "The value must have a length of at least 4."
+                                    },
+                                    {
+                                        "isValid": "[or(or(empty(steps('basics').name),and(not(startsWith(steps('basics').name,'[[')),startsWith(steps('basics').name,'['),endsWith(steps('basics').name,']'),greater(indexOf(steps('basics').name,'('),-1),greater(indexOf(steps('basics').name,')'),-1))),lessOrEquals(length(steps('basics').name),12))]",
+                                        "message": "The value must have a length of at most 12."
+                                    }
+                                ]
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "application",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Application",
+                            "subLabel": "",
+                            "defaultValue": "",
+                            "toolTip": "The name of the application being deployed, used for tagging resources.",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": ""
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "criticality",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Criticality",
+                            "defaultValue": "Medium",
+                            "toolTip": "The criticality of the application being deployed, used for tagging resources.",
+                            "constraints": {
+                                "required": false,
+                                "allowedValues": [
+                                    {
+                                        "label": "High",
+                                        "value": "High"
+                                    },
+                                    {
+                                        "label": "Medium",
+                                        "value": "Medium"
+                                    },
+                                    {
+                                        "label": "Low",
+                                        "value": "Low"
+                                    }
+                                ]
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "environment",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Environment",
+                            "defaultValue": "Demo",
+                            "toolTip": "The environment in which the application is deployed, used for tagging resources.",
+                            "constraints": {
+                                "required": false,
+                                "allowedValues": [
+                                    {
+                                        "label": "Production",
+                                        "value": "Production"
+                                    },
+                                    {
+                                        "label": "Test",
+                                        "value": "Test"
+                                    },
+                                    {
+                                        "label": "Dev",
+                                        "value": "Dev"
+                                    },
+                                    {
+                                        "label": "Demo",
+                                        "value": "Demo"
+                                    }
+                                ]
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "type",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Type",
+                            "subLabel": "",
+                            "defaultValue": "",
+                            "toolTip": "The type of the application being deployed, used for tagging resources.",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": ""
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "function",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Function",
+                            "subLabel": "",
+                            "defaultValue": "",
+                            "toolTip": "The function of the resource being deployed, used for tagging resources.",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": ""
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "date",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Date",
+                            "subLabel": "",
+                            "defaultValue": "[[utcNow('yyyy-MM-dd HH:mm:ss')]",
+                            "toolTip": "The date and time the resources are being deployed.",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": ""
+                            },
+                            "visible": false
+                        }
+                    ]
+                }
+            ]
+        },
+        "outputs": {
+            "kind": "Subscription",
+            "location": "[steps('basics').resourceScope.location.name]",
+            "subscriptionId": "[steps('basics').resourceScope.subscription.id]",
+            "parameters": {
+                "location": "[steps('basics').resourceScope.location.name]",
+                "email": "[steps('basics').email]",
+                "service": "[steps('basics').service]",
+                "name": "[steps('basics').name]",
+                "application": "[steps('basics').application]",
+                "criticality": "[steps('basics').criticality]",
+                "environment": "[steps('basics').environment]",
+                "type": "[steps('basics').type]",
+                "function": "[steps('basics').function]",
+                "date": "[steps('basics').date]"
+            }
+        }
+    }
+}
