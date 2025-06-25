@@ -100,12 +100,12 @@
                         {
                             "name": "service",
                             "type": "Microsoft.Common.TextBox",
-                            "label": "Service",
+                            "label": "Service short name",
                             "subLabel": "",
                             "defaultValue": "avd",
                             "toolTip": "A short name of the service being deployed, used for abbreviations in resource names.",
                             "constraints": {
-                                "required": false,
+                                "required": true,
                                 "validations": [
                                     {
                                         "isValid": "[or(or(empty(steps('basics').service),and(not(startsWith(steps('basics').service,'[[')),startsWith(steps('basics').service,'['),endsWith(steps('basics').service,']'),greater(indexOf(steps('basics').service,'('),-1),greater(indexOf(steps('basics').service,')'),-1))),greaterOrEquals(length(steps('basics').service),2))]",
@@ -122,12 +122,12 @@
                         {
                             "name": "name",
                             "type": "Microsoft.Common.TextBox",
-                            "label": "Name",
+                            "label": "Resource identifier",
                             "subLabel": "",
-                            "defaultValue": "resources",
-                            "toolTip": ".",
+                            "defaultValue": "",
+                            "toolTip": "A short identifier name for the resources the group will host.",
                             "constraints": {
-                                "required": false,
+                                "required": true,
                                 "validations": [
                                     {
                                         "isValid": "[or(or(empty(steps('basics').name),and(not(startsWith(steps('basics').name,'[[')),startsWith(steps('basics').name,'['),endsWith(steps('basics').name,']'),greater(indexOf(steps('basics').name,'('),-1),greater(indexOf(steps('basics').name,')'),-1))),greaterOrEquals(length(steps('basics').name),4))]",
@@ -162,7 +162,7 @@
                             "defaultValue": "Medium",
                             "toolTip": "The criticality of the application being deployed, used for tagging resources.",
                             "constraints": {
-                                "required": false,
+                                "required": true,
                                 "allowedValues": [
                                     {
                                         "label": "High",
@@ -187,7 +187,7 @@
                             "defaultValue": "Demo",
                             "toolTip": "The environment in which the application is deployed, used for tagging resources.",
                             "constraints": {
-                                "required": false,
+                                "required": true,
                                 "allowedValues": [
                                     {
                                         "label": "Production",
