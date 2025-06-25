@@ -2,6 +2,18 @@
 targetScope = 'subscription'
 
 @description('The region or location the network resources will be deployed into.')
+@allowed([
+  'eastus'
+  'westus2'
+  'westus3'
+  'centralus'
+  'southcentralus'
+  'brazilsouth'
+  'australiaeast'
+  'australiasoutheast'
+  'uksouth'
+  'southindia'
+])
 param location string
 
 @description('The list of allowed regions to create resource groups in.')
