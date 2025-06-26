@@ -67,7 +67,7 @@
                                 "regex": "",
                                 "validationMessage": ""
                             },
-                            "visible": true
+                            "visible": false
                         }
                     ]
                 }

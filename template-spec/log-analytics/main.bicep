@@ -43,7 +43,7 @@ var regions = {
 // Create the Log Analytics workspace resource
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2025-02-01' = {
   name: 'log-${name}-${regions[location]}'
-  location: resourceGroup().location
+  location: location
   tags: tags
   // etag: 'string'
   // identity: {
@@ -54,9 +54,9 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2025-02
   // }
   properties: {
     //defaultDataCollectionRuleResourceId: 'string'
-    failover: {}
+    //failover: {}
     features: {
-      //clusterResourceId: 'string'
+      // clusterResourceId: 'string'
       disableLocalAuth: false
       enableDataExport: false
       enableLogAccessUsingOnlyResourcePermissions: false
@@ -65,13 +65,13 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2025-02
     forceCmkForQuery: false
     publicNetworkAccessForIngestion: 'Enabled'
     publicNetworkAccessForQuery: 'Enabled'
-    replication: {
-      enabled: false
-      location: ''
-    }
+    // replication: {
+    //   enabled: false
+    //   location: ''
+    // }
     retentionInDays: 30
     sku: {
-      capacityReservationLevel: 0
+      // capacityReservationLevel: 0
       name: 'pergb2018'
     }
     workspaceCapping: {
