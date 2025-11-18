@@ -21,8 +21,8 @@ This Bicep template deploys a Windows virtual machine into an existing Azure vir
 - An existing Azure Virtual Network and subnet
 - Appropriate permissions to deploy VMs and extensions
 - For Active Directory domain join: Domain join credentials
-- For Entra ID join: Azure AD tenant configured for device registration
-- **Recommended**: Azure Key Vault to store sensitive credentials (admin username/password, domain join credentials)
+- For Entra ID join: Entra ID tenant configured for device registration
+- Azure Key Vault to store sensitive credentials (admin username/password, domain join credentials)
 
 ## Parameters
 
@@ -79,19 +79,13 @@ Optional parameters for running PowerShell scripts after deployment:
 
 ## Supported Operating Systems
 
-### Windows Server Images
+### Windows 11 Images (Client Licensing Enabled)
 
 ```bicep
-// Windows Server 2022 Datacenter Azure Edition
-imagePublisher: 'MicrosoftWindowsServer'
-imageOffer: 'WindowsServer'
-imageSku: '2022-datacenter-azure-edition'
-
-// Windows Server 2022 Datacenter
-imageSku: '2022-datacenter-g2'
-
-// Windows Server 2019 Datacenter
-imageSku: '2019-datacenter-gensecond'
+imagePublisher: 'MicrosoftWindowsDesktop'
+imageOffer: 'Windows-11'
+imageSku: 'win11-24h2-ent'  // Enterprise, also use win11-23h2-ent, win11-25h2-ent etc.
+imageSku: 'win11-24h2-avd'  // Enterprise Multi-session (AVD), also use win11-23h2-avd, win11-25h2-avd etc.
 ```
 
 ### Windows 10 Images (Client Licensing Enabled)
@@ -103,13 +97,22 @@ imageSku: 'win10-22h2-ent'  // Enterprise
 imageSku: 'win10-22h2-entn'  // Enterprise Multi-session (AVD)
 ```
 
-### Windows 11 Images (Client Licensing Enabled)
+### Windows Server Images
 
 ```bicep
-imagePublisher: 'MicrosoftWindowsDesktop'
-imageOffer: 'Windows-11'
-imageSku: 'win11-23h2-ent'  // Enterprise
-imageSku: 'win11-23h2-entn'  // Enterprise Multi-session (AVD)
+// Windows Server 2022 Datacenter Azure Edition
+imagePublisher: 'MicrosoftWindowsServer'
+imageOffer: 'WindowsServer'
+imageSku: '2022-datacenter-azure-edition'
+
+// Windows Server 2025 Datacenter
+imageSku: '2025-datacenter-g2'
+
+// Windows Server 2022 Datacenter
+imageSku: '2022-datacenter-g2'
+
+// Windows Server 2019 Datacenter
+imageSku: '2019-datacenter-g2'
 ```
 
 ## Disk Types
@@ -125,11 +128,11 @@ Supported OS disk types:
 
 ### Example 1: Windows Server 2022 without Domain Join
 
-```bash
-az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file main.bicep \
-  --parameters main.bicepparam \
+```powershell
+az deployment group create `
+  --resource-group myResourceGroup `
+  --template-file main.bicep `
+  --parameters main.bicepparam `
   --parameters adminPassword='<secure-password>'
 ```
 
@@ -140,17 +143,17 @@ Update `main.bicepparam`:
 ```bicep
 param imagePublisher = 'MicrosoftWindowsDesktop'
 param imageOffer = 'Windows-11'
-param imageSku = 'win11-23h2-ent'
+param imageSku = 'win11-24h2-ent'
 param domainJoinType = 'EntraID'
 ```
 
 Deploy:
 
-```bash
-az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file main.bicep \
-  --parameters main.bicepparam \
+```powershell
+az deployment group create `
+  --resource-group myResourceGroup `
+  --template-file main.bicep `
+  --parameters main.bicepparam `
   --parameters adminPassword='<secure-password>'
 ```
 
@@ -165,11 +168,11 @@ param vmSize = 'Standard_B2s'  // Example: older VM size
 ```
 
 Deploy:
-```bash
-az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file main.bicep \
-  --parameters main.bicepparam \
+```powershell
+az deployment group create `
+  --resource-group myResourceGroup `
+  --template-file main.bicep `
+  --parameters main.bicepparam `
   --parameters adminPassword='<secure-password>'
 ```
 
@@ -178,7 +181,7 @@ az deployment group create \
 Use the `main.keyvault.bicepparam` file to reference secrets stored in Azure Key Vault:
 
 1. Create secrets in your Key Vault:
-```bash
+```powershell
 az keyvault secret set --vault-name myKeyVault --name adminUsername --value "azureadmin"
 az keyvault secret set --vault-name myKeyVault --name adminPassword --value "<secure-password>"
 az keyvault secret set --vault-name myKeyVault --name adDomainName --value "contoso.com"
@@ -194,10 +197,10 @@ param adminPassword = getSecret('00000000-0000-0000-0000-000000000000', 'myKeyVa
 ```
 
 3. Deploy:
-```bash
-az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file main.bicep \
+```powershell
+az deployment group create `
+  --resource-group myResourceGroup `
+  --template-file main.bicep `
   --parameters main.keyvault.bicepparam
 ```
 
@@ -216,12 +219,12 @@ param adOuPath = 'OU=Servers,DC=contoso,DC=com'
 
 Deploy:
 
-```bash
-az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file main.bicep \
-  --parameters main.bicepparam \
-  --parameters adminPassword='<secure-password>' \
+```powershell
+az deployment group create `
+  --resource-group myResourceGroup `
+  --template-file main.bicep `
+  --parameters main.bicepparam `
+  --parameters adminPassword='<secure-password>' `
   --parameters adDomainJoinPassword='<domain-join-password>'
 ```
 
@@ -238,11 +241,11 @@ param scriptArguments = '-Environment Production -Region EastUS'
 
 Deploy:
 
-```bash
-az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file main.bicep \
-  --parameters main.bicepparam \
+```powershell
+az deployment group create `
+  --resource-group myResourceGroup `
+  --template-file main.bicep `
+  --parameters main.bicepparam `
   --parameters adminPassword='<secure-password>'
 ```
 
@@ -302,17 +305,17 @@ param enableTrustedLaunch = false
 
 Verify if your VM size supports Trusted Launch:
 
-```bash
+```powershell
 # Check VM size capabilities
 az vm list-sizes --location eastus --query "[?contains(name, 'Standard_D4s_v5')]"
 
 # Verify image supports Trusted Launch
-az vm image show \
-  --location eastus \
-  --publisher MicrosoftWindowsDesktop \
-  --offer Windows-11 \
-  --sku win11-23h2-ent \
-  --version latest \
+az vm image show `
+  --location eastus `
+  --publisher MicrosoftWindowsDesktop `
+  --offer Windows-11 `
+  --sku win11-23h2-ent `
+  --version latest `
   --query "hyperVGeneration"
 ```
 
@@ -324,12 +327,12 @@ Azure Key Vault integration allows you to securely store and reference sensitive
 
 #### Step 1: Create Key Vault and Store Secrets
 
-```bash
+```powershell
 # Create a Key Vault (if not already created)
-az keyvault create \
-  --name myKeyVault \
-  --resource-group myKeyVaultRG \
-  --location eastus \
+az keyvault create `
+  --name myKeyVault `
+  --resource-group myKeyVaultRG `
+  --location eastus `
   --enable-rbac-authorization false
 
 # Store admin credentials
@@ -345,17 +348,17 @@ az keyvault secret set --vault-name myKeyVault --name adOuPath --value "OU=Serve
 
 #### Step 2: Grant Access to Deployment Identity
 
-```bash
+```powershell
 # For user-based deployment
-az keyvault set-policy \
-  --name myKeyVault \
-  --upn user@contoso.com \
+az keyvault set-policy `
+  --name myKeyVault `
+  --upn user@contoso.com `
   --secret-permissions get list
 
 # For service principal-based deployment
-az keyvault set-policy \
-  --name myKeyVault \
-  --spn <service-principal-id> \
+az keyvault set-policy `
+  --name myKeyVault `
+  --spn <service-principal-id> `
   --secret-permissions get list
 ```
 
@@ -375,10 +378,10 @@ param adOuPath = getSecret('00000000-0000-0000-0000-000000000000', 'myKeyVaultRG
 
 #### Step 4: Deploy Using Key Vault
 
-```bash
-az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file main.bicep \
+```powershell
+az deployment group create `
+  --resource-group myResourceGroup `
+  --template-file main.bicep `
   --parameters main.keyvault.bicepparam
 ```
 
@@ -510,10 +513,10 @@ resource customExtension 'Microsoft.Compute/virtualMachines/extensions@2024-03-0
 
 Validate the template before deployment:
 
-```bash
-az deployment group validate \
-  --resource-group myResourceGroup \
-  --template-file main.bicep \
+```powershell
+az deployment group validate `
+  --resource-group myResourceGroup `
+  --template-file main.bicep `
   --parameters main.bicepparam
 ```
 
