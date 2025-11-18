@@ -19,35 +19,41 @@ The following parameters can be stored in Azure Key Vault:
 
 ### 1. Create Key Vault and Store Secrets
 
-```bash
+Ensure you have the **Key Vault Administrator** role on the target key vault and the key vault's access configuration is set to: 'Azure role-based access control'.
+
+```powershell
+$KeyVault = "kv-Avd1-dsplbxulhz-aue"
+$ResourceGroup = "rg-Avd1Images-aue"
+$Location = "australiaeast"
+
 # Create Key Vault
-az keyvault create \
-  --name myKeyVault \
-  --resource-group myKeyVaultRG \
-  --location eastus
+az keyvault create `
+  --name $KeyVault `
+  --resource-group $ResourceGroup `
+  --location $Location
 
 # Store secrets
-az keyvault secret set --vault-name myKeyVault --name adminUsername --value "azureadmin"
-az keyvault secret set --vault-name myKeyVault --name adminPassword --value "P@ssw0rd123!"
-az keyvault secret set --vault-name myKeyVault --name adDomainName --value "contoso.com"
-az keyvault secret set --vault-name myKeyVault --name adDomainJoinUsername --value "contoso\\joiner"
-az keyvault secret set --vault-name myKeyVault --name adDomainJoinPassword --value "DomainP@ss123!"
-az keyvault secret set --vault-name myKeyVault --name adOuPath --value "OU=Servers,DC=contoso,DC=com"
+az keyvault secret set --vault-name $KeyVault --name adminUsername --value "azureadmin"
+az keyvault secret set --vault-name $KeyVault --name adminPassword --value "P@ssw0rd123!"
+az keyvault secret set --vault-name $KeyVault --name adDomainName --value "contoso.com"
+az keyvault secret set --vault-name $KeyVault --name adDomainJoinUsername --value "contoso\\joiner"
+az keyvault secret set --vault-name $KeyVault --name adDomainJoinPassword --value "DomainP@ss123!"
+az keyvault secret set --vault-name $KeyVault --name adOuPath --value "OU=Servers,DC=contoso,DC=com"
 ```
 
 ### 2. Grant Access
 
-```bash
+```powershell
 # For your user account
-az keyvault set-policy \
-  --name myKeyVault \
-  --upn user@contoso.com \
+az keyvault set-policy `
+  --name $KeyVault `
+  --upn user@contoso.com `
   --secret-permissions get list
 
 # For a service principal (CI/CD pipelines)
-az keyvault set-policy \
-  --name myKeyVault \
-  --spn <service-principal-app-id> \
+az keyvault set-policy `
+  --name myKeyVault `
+  --spn <service-principal-app-id> `
   --secret-permissions get list
 ```
 
@@ -55,12 +61,12 @@ az keyvault set-policy \
 
 **Option A: Use the provided Key Vault parameters file**
 
-```bash
+```powershell
 # Update main.keyvault.bicepparam with your subscription ID, resource group, and Key Vault name
 # Then deploy:
-az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file main.bicep \
+az deployment group create `
+  --resource-group $resourceGroup `
+  --template-file main.bicep `
   --parameters main.keyvault.bicepparam
 ```
 
@@ -142,24 +148,24 @@ These are minimum required permissions. Additional permissions may be needed for
 ### RBAC vs Access Policies
 
 **Access Policies** (Traditional):
-```bash
-az keyvault set-policy \
-  --name myKeyVault \
-  --upn user@contoso.com \
+```powershell
+az keyvault set-policy `
+  --name myKeyVault `
+  --upn user@contoso.com `
   --secret-permissions get list
 ```
 
 **RBAC** (Recommended):
-```bash
+```powershell
 # Enable RBAC authorization on Key Vault
-az keyvault update \
-  --name myKeyVault \
+az keyvault update `
+  --name myKeyVault `
   --enable-rbac-authorization true
 
 # Assign role
-az role assignment create \
-  --role "Key Vault Secrets User" \
-  --assignee user@contoso.com \
+az role assignment create `
+  --role "Key Vault Secrets User" `
+  --assignee user@contoso.com `
   --scope /subscriptions/<sub-id>/resourceGroups/<rg>/providers/Microsoft.KeyVault/vaults/myKeyVault
 ```
 
@@ -170,16 +176,16 @@ For production environments, consider:
 2. **Firewall Rules**: Restrict Key Vault access to specific IP ranges or VNets
 3. **Service Endpoints**: Enable VNet service endpoints for Key Vault
 
-```bash
+```powershell
 # Add firewall rule
-az keyvault network-rule add \
-  --name myKeyVault \
+az keyvault network-rule add `
+  --name myKeyVault `
   --ip-address "203.0.113.0/24"
 
 # Add VNet rule
-az keyvault network-rule add \
-  --name myKeyVault \
-  --vnet-name myVNet \
+az keyvault network-rule add `
+  --name myKeyVault `
+  --vnet-name myVNet `
   --subnet mySubnet
 ```
 
@@ -188,17 +194,17 @@ az keyvault network-rule add \
 ### Error: "The user, group or application does not have secrets get permission"
 
 **Solution**: Grant secret permissions to the deployment identity
-```bash
-az keyvault set-policy \
-  --name myKeyVault \
-  --upn user@contoso.com \
+```powershell
+az keyvault set-policy `
+  --name myKeyVault `
+  --upn user@contoso.com `
   --secret-permissions get list
 ```
 
 ### Error: "Secret not found"
 
 **Solution**: Verify the secret exists and the name is correct
-```bash
+```powershell
 # List all secrets
 az keyvault secret list --vault-name myKeyVault
 
@@ -213,9 +219,9 @@ az keyvault secret show --vault-name myKeyVault --name adminUsername
 ### Error: "Key Vault is behind a firewall"
 
 **Solution**: Add your deployment source IP to the Key Vault firewall or disable the firewall temporarily
-```bash
-az keyvault update \
-  --name myKeyVault \
+```powershell
+az keyvault update `
+  --name myKeyVault `
   --default-action Allow
 ```
 
@@ -248,9 +254,9 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az deployment group create \
-        --resource-group $(resourceGroup) \
-        --template-file bicep/vm/main.bicep \
+      az deployment group create `
+        --resource-group $(resourceGroup) `
+        --template-file bicep/vm/main.bicep `
         --parameters bicep/vm/main.keyvault.bicepparam
 ```
 
@@ -276,9 +282,9 @@ jobs:
     
     - name: Deploy VM
       run: |
-        az deployment group create \
-          --resource-group ${{ secrets.RESOURCE_GROUP }} \
-          --template-file bicep/vm/main.bicep \
+        az deployment group create `
+          --resource-group ${{ secrets.RESOURCE_GROUP }} `
+          --template-file bicep/vm/main.bicep `
           --parameters bicep/vm/main.keyvault.bicepparam
 ```
 
