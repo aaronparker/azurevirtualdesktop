@@ -1,0 +1,373 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2021-09-09/uiFormDefinition.schema.json",
+    "view": {
+        "kind": "Form",
+        "properties": {
+            "title": "Windows Virtual Machine Deployment",
+            "steps": [
+                {
+                    "name": "basics",
+                    "label": "Basics",
+                    "elements": [
+                        {
+                            "name": "resourceScope",
+                            "type": "Microsoft.Common.ResourceScope",
+                            "subscription": {
+                                "constraints": {
+                                    "validations": []
+                                },
+                                "resourceProviders": [
+                                    "Microsoft.Compute",
+                                    "Microsoft.Network"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "vmName",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Virtual Machine Name",
+                            "placeholder": "myWindowsVM01",
+                            "defaultValue": "",
+                            "toolTip": "Name of the virtual machine to create",
+                            "constraints": {
+                                "required": true,
+                                "regex": "^[a-zA-Z0-9-]{1,15}$",
+                                "validationMessage": "VM name must be 1-15 characters and contain only letters, numbers, and hyphens"
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "resourceGroupName",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Resource Group Name",
+                            "placeholder": "rg-windows-vms",
+                            "defaultValue": "",
+                            "toolTip": "Resource group for the VM (will be created if it doesn't exist)",
+                            "constraints": {
+                                "required": true,
+                                "regex": "^[a-zA-Z0-9-_().]{1,90}$",
+                                "validationMessage": "Resource group name must be 1-90 characters"
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "location",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Region",
+                            "placeholder": "Select a region",
+                            "defaultValue": "East US",
+                            "toolTip": "Azure region for deployment",
+                            "constraints": {
+                                "required": true,
+                                "allowedValues": [
+                                    {
+                                        "label": "East US",
+                                        "value": "eastus"
+                                    },
+                                    {
+                                        "label": "East US 2",
+                                        "value": "eastus2"
+                                    },
+                                    {
+                                        "label": "West US",
+                                        "value": "westus"
+                                    },
+                                    {
+                                        "label": "West US 2",
+                                        "value": "westus2"
+                                    },
+                                    {
+                                        "label": "West US 3",
+                                        "value": "westus3"
+                                    },
+                                    {
+                                        "label": "Central US",
+                                        "value": "centralus"
+                                    },
+                                    {
+                                        "label": "North Europe",
+                                        "value": "northeurope"
+                                    },
+                                    {
+                                        "label": "West Europe",
+                                        "value": "westeurope"
+                                    },
+                                    {
+                                        "label": "UK South",
+                                        "value": "uksouth"
+                                    },
+                                    {
+                                        "label": "Southeast Asia",
+                                        "value": "southeastasia"
+                                    },
+                                    {
+                                        "label": "Australia East",
+                                        "value": "australiaeast"
+                                    }
+                                ]
+                            },
+                            "visible": true
+                        }
+                    ]
+                },
+                {
+                    "name": "vmConfig",
+                    "label": "VM Configuration",
+                    "elements": [
+                        {
+                            "name": "windowsImageType",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Windows Image",
+                            "placeholder": "Select Windows version",
+                            "defaultValue": "Windows 11 Enterprise",
+                            "toolTip": "Select the Windows operating system image",
+                            "constraints": {
+                                "required": true,
+                                "allowedValues": [
+                                    {
+                                        "label": "Windows 11 Enterprise",
+                                        "value": "Windows 11 Enterprise"
+                                    },
+                                    {
+                                        "label": "Windows 10 Enterprise",
+                                        "value": "Windows 10 Enterprise"
+                                    },
+                                    {
+                                        "label": "Windows Server 2022 Datacenter",
+                                        "value": "Windows Server 2022 Datacenter"
+                                    },
+                                    {
+                                        "label": "Windows Server 2019 Datacenter",
+                                        "value": "Windows Server 2019 Datacenter"
+                                    }
+                                ]
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "vmSize",
+                            "type": "Microsoft.Compute.SizeSelector",
+                            "label": "VM Size",
+                            "toolTip": "Select the virtual machine size",
+                            "recommendedSizes": [
+                                "Standard_D4s_v5",
+                                "Standard_D2s_v5",
+                                "Standard_D8s_v5"
+                            ],
+                            "constraints": {
+                                "allowedSizes": [
+                                    "Standard_D2s_v5",
+                                    "Standard_D4s_v5",
+                                    "Standard_D8s_v5",
+                                    "Standard_D16s_v5",
+                                    "Standard_E4s_v5",
+                                    "Standard_E8s_v5"
+                                ]
+                            },
+                            "osPlatform": "Windows",
+                            "count": 1,
+                            "visible": true
+                        },
+                        {
+                            "name": "osDiskType",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "OS Disk Type",
+                            "placeholder": "Select disk type",
+                            "defaultValue": "Premium SSD (Premium_LRS)",
+                            "toolTip": "Storage type for the OS disk",
+                            "constraints": {
+                                "required": true,
+                                "allowedValues": [
+                                    {
+                                        "label": "Premium SSD (Premium_LRS)",
+                                        "value": "Premium_LRS"
+                                    },
+                                    {
+                                        "label": "Standard SSD (StandardSSD_LRS)",
+                                        "value": "StandardSSD_LRS"
+                                    },
+                                    {
+                                        "label": "Standard HDD (Standard_LRS)",
+                                        "value": "Standard_LRS"
+                                    },
+                                    {
+                                        "label": "Premium SSD Zone Redundant (Premium_ZRS)",
+                                        "value": "Premium_ZRS"
+                                    },
+                                    {
+                                        "label": "Standard SSD Zone Redundant (StandardSSD_ZRS)",
+                                        "value": "StandardSSD_ZRS"
+                                    }
+                                ]
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "availabilityZone",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Availability Zone",
+                            "placeholder": "Select availability zone",
+                            "defaultValue": "Zone 1",
+                            "toolTip": "Availability zone for the VM (if supported in the region)",
+                            "constraints": {
+                                "required": true,
+                                "allowedValues": [
+                                    {
+                                        "label": "Zone 1",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "label": "Zone 2",
+                                        "value": "2"
+                                    },
+                                    {
+                                        "label": "Zone 3",
+                                        "value": "3"
+                                    },
+                                    {
+                                        "label": "No Zone (Regional)",
+                                        "value": ""
+                                    }
+                                ]
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "enableTrustedLaunch",
+                            "type": "Microsoft.Common.CheckBox",
+                            "label": "Enable Trusted Launch",
+                            "defaultValue": true,
+                            "toolTip": "Enable Trusted Launch security (Secure Boot and vTPM). Disable for older VM sizes or images that don't support it.",
+                            "visible": true
+                        }
+                    ]
+                },
+                {
+                    "name": "networkConfig",
+                    "label": "Network",
+                    "elements": [
+                        {
+                            "name": "vnetSelector",
+                            "type": "Microsoft.Solutions.ResourceSelector",
+                            "label": "Virtual Network",
+                            "resourceType": "Microsoft.Network/virtualNetworks",
+                            "toolTip": "Select an existing virtual network",
+                            "constraints": {
+                                "required": true
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "subnetName",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Subnet Name",
+                            "placeholder": "default",
+                            "defaultValue": "default",
+                            "toolTip": "Name of the subnet within the selected virtual network",
+                            "constraints": {
+                                "required": true
+                            },
+                            "visible": true
+                        }
+                    ]
+                },
+                {
+                    "name": "credentialsConfig",
+                    "label": "Credentials",
+                    "elements": [
+                        {
+                            "name": "credentialsInfo",
+                            "type": "Microsoft.Common.InfoBox",
+                            "visible": true,
+                            "options": {
+                                "icon": "Info",
+                                "text": "Credentials are securely stored in Azure Key Vault. Ensure your Key Vault contains the following secrets: adminUsername, adminPassword, and domain credentials if using Active Directory join."
+                            }
+                        },
+                        {
+                            "name": "keyVaultSelector",
+                            "type": "Microsoft.Solutions.ResourceSelector",
+                            "label": "Key Vault",
+                            "resourceType": "Microsoft.KeyVault/vaults",
+                            "toolTip": "Select the Key Vault containing credential secrets",
+                            "constraints": {
+                                "required": true
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "domainJoinType",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Domain Join Type",
+                            "placeholder": "Select domain join option",
+                            "defaultValue": "None",
+                            "toolTip": "Select how the VM should be joined to a domain",
+                            "constraints": {
+                                "required": true,
+                                "allowedValues": [
+                                    {
+                                        "label": "None (No domain join)",
+                                        "value": "None"
+                                    },
+                                    {
+                                        "label": "Active Directory",
+                                        "value": "ActiveDirectory"
+                                    },
+                                    {
+                                        "label": "Entra ID (Azure AD)",
+                                        "value": "EntraID"
+                                    }
+                                ]
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "adInfo",
+                            "type": "Microsoft.Common.InfoBox",
+                            "visible": "[equals(steps('credentialsConfig').domainJoinType, 'ActiveDirectory')]",
+                            "options": {
+                                "icon": "Info",
+                                "text": "For Active Directory join, ensure your Key Vault contains these secrets: adDomainName, adDomainJoinUsername, adDomainJoinPassword, and optionally adOuPath."
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "tags",
+                    "label": "Tags",
+                    "elements": [
+                        {
+                            "name": "tagsByResource",
+                            "type": "Microsoft.Common.TagsByResource",
+                            "toolTip": "Tags to apply to resources",
+                            "resources": [
+                                "Microsoft.Compute/virtualMachines",
+                                "Microsoft.Network/networkInterfaces"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "outputs": {
+            "parameters": {
+                "vmName": "[steps('basics').vmName]",
+                "resourceGroupName": "[steps('basics').resourceGroupName]",
+                "location": "[steps('basics').location]",
+                "vnetResourceId": "[steps('networkConfig').vnetSelector.id]",
+                "subnetName": "[steps('networkConfig').subnetName]",
+                "keyVaultResourceId": "[steps('credentialsConfig').keyVaultSelector.id]",
+                "domainJoinType": "[steps('credentialsConfig').domainJoinType]",
+                "vmSize": "[steps('vmConfig').vmSize]",
+                "osDiskType": "[steps('vmConfig').osDiskType]",
+                "availabilityZone": "[steps('vmConfig').availabilityZone]",
+                "windowsImageType": "[steps('vmConfig').windowsImageType]",
+                "enableTrustedLaunch": "[steps('vmConfig').enableTrustedLaunch]",
+                "tags": "[steps('tags').tagsByResource]"
+            },
+            "kind": "Subscription",
+            "location": "[steps('basics').location]",
+            "subscriptionId": "[steps('basics').resourceScope.subscription.subscriptionId]"
+        }
+    }
+}
