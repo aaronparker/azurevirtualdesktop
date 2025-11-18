@@ -21,11 +21,11 @@ using 'main.bicep'
 // ================================================================================
 // VM Configuration
 // ================================================================================
-param vmName = 'myWindowsVM'
-param location = 'eastus'
+param vmName = 'TestVM01'
+param location = 'australiaeast'
 param availabilityZone = '1'
-param vmSize = 'Standard_D4s_v5'
-param osDiskType = 'Premium_LRS'
+param vmSize = 'Standard_D4as_v5'
+param osDiskType = 'Standard_LRS'
 
 // ================================================================================
 // Image Configuration
@@ -36,28 +36,38 @@ param imageSku = 'win11-25h2-ent'
 param imageVersion = 'latest'
 
 // ================================================================================
+// Static variables
+// ================================================================================
+var resouceGroupName = 'rg-Avd1Images-aue'
+var keyVaultName = 'kv-Avd1-dsplbxulhz-aue'
+var subscriptionId = '3fc4c8ac-a2b8-4b39-9729-f1a5eeacbab5'
+
+var virtualNetworkResourceGroup = 'rg-Avd1-Network-aue'
+var virtualNetworkName = 'vnet-Avd1-HostPools-australiaeast'
+
+// ================================================================================
 // Administrator Credentials - FROM KEY VAULT
 // ================================================================================
 // Replace with your actual subscription ID, resource group, and Key Vault name
-param adminUsername = getSecret('00000000-0000-0000-0000-000000000000', 'myKeyVaultRG', 'myKeyVault', 'adminUsername')
-param adminPassword = getSecret('00000000-0000-0000-0000-000000000000', 'myKeyVaultRG', 'myKeyVault', 'adminPassword')
+param adminUsername = getSecret(subscriptionId, resouceGroupName, keyVaultName, 'adminUsername')
+param adminPassword = getSecret(subscriptionId, resouceGroupName, keyVaultName, 'adminPassword')
 
 // ================================================================================
 // Network Configuration
 // ================================================================================
-param vnetResourceId = '/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myNetworkRG/providers/Microsoft.Network/virtualNetworks/myVNet'
-param subnetName = 'default'
+param vnetResourceId = '/subscriptions/${subscriptionId}/resourceGroups/${virtualNetworkResourceGroup}/providers/Microsoft.Network/virtualNetworks/${virtualNetworkName}'
+param subnetName = 'Desktops4'
 
 // ================================================================================
 // Domain Join Configuration - FROM KEY VAULT
 // ================================================================================
-param domainJoinType = 'ActiveDirectory'
+param domainJoinType = 'EntraID'
 
 // Replace with your actual subscription ID, resource group, and Key Vault name
-param adDomainName = getSecret('00000000-0000-0000-0000-000000000000', 'myKeyVaultRG', 'myKeyVault', 'adDomainName')
-param adDomainJoinUsername = getSecret('00000000-0000-0000-0000-000000000000', 'myKeyVaultRG', 'myKeyVault', 'adDomainJoinUsername')
-param adDomainJoinPassword = getSecret('00000000-0000-0000-0000-000000000000', 'myKeyVaultRG', 'myKeyVault', 'adDomainJoinPassword')
-param adOuPath = getSecret('00000000-0000-0000-0000-000000000000', 'myKeyVaultRG', 'myKeyVault', 'adOuPath')
+param adDomainName = getSecret(subscriptionId, resouceGroupName, keyVaultName, 'adDomainName')
+param adDomainJoinUsername = getSecret(subscriptionId, resouceGroupName, keyVaultName, 'adDomainJoinUsername')
+param adDomainJoinPassword = getSecret(subscriptionId, resouceGroupName, keyVaultName, 'adDomainJoinPassword')
+param adOuPath = getSecret(subscriptionId, resouceGroupName, keyVaultName, 'adOuPath')
 
 // ================================================================================
 // Additional Settings
@@ -77,7 +87,8 @@ param scriptArguments = ''
 // Tags
 // ================================================================================
 param tags = {
-  Environment: 'Production'
-  ManagedBy: 'Infrastructure Team'
-  CostCenter: 'IT-Operations'
+  Environment: 'QA'
+  ManagedBy: 'QA Team'
+  CostCenter: 'QA'
+  Application: 'Nerdio Migrate'
 }

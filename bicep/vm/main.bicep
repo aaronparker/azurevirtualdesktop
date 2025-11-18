@@ -105,6 +105,8 @@ param scriptFileName string = ''
 @description('Arguments to pass to the PowerShell script')
 param scriptArguments string = ''
 
+//param lastUpdateDate string = utcNow('yyyy-M-dd HH:mm:ss')
+
 @description('Tags to apply to resources')
 param tags object = {}
 
@@ -195,13 +197,13 @@ resource virtualMachine 'Microsoft.Compute/virtualMachines@2024-03-01' = {
       windowsConfiguration: {
         provisionVMAgent: true
         enableAutomaticUpdates: true
-        patchSettings: {
-          patchMode: 'AutomaticByPlatform'
-          assessmentMode: 'AutomaticByPlatform'
-          automaticByPlatformSettings: {
-            rebootSetting: 'IfRequired'
-          }
-        }
+        // patchSettings: {
+        //   patchMode: 'AutomaticByPlatform'
+        //   assessmentMode: 'AutomaticByPlatform'
+        //   automaticByPlatformSettings: {
+        //     rebootSetting: 'IfRequired'
+        //   }
+        // }
       }
     }
     networkProfile: {
