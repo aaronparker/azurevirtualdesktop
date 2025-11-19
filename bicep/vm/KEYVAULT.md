@@ -59,8 +59,6 @@ az keyvault set-policy `
 
 ### 3. Deploy Using Key Vault
 
-**Option A: Use the provided Key Vault parameters file**
-
 ```powershell
 # Update main.keyvault.bicepparam with your subscription ID, resource group, and Key Vault name
 # Then deploy:
@@ -68,20 +66,6 @@ az deployment group create `
   --resource-group $resourceGroup `
   --template-file main.bicep `
   --parameters main.keyvault.bicepparam
-```
-
-**Option B: Modify main.bicepparam to use Key Vault**
-
-Edit `main.bicepparam` and replace the parameter assignments:
-
-```bicep
-// Replace these lines
-param adminUsername = 'azureadmin'
-param adminPassword = ''
-
-// With these (update with your subscription ID, resource group, and Key Vault name)
-param adminUsername = getSecret('00000000-0000-0000-0000-000000000000', 'myKeyVaultRG', 'myKeyVault', 'adminUsername')
-param adminPassword = getSecret('00000000-0000-0000-0000-000000000000', 'myKeyVaultRG', 'myKeyVault', 'adminPassword')
 ```
 
 ## getSecret() Syntax
@@ -118,22 +102,6 @@ param adDomainName = getSecret('12345678-1234-1234-1234-123456789012', 'kv-rg', 
 param adDomainJoinUsername = getSecret('12345678-1234-1234-1234-123456789012', 'kv-rg', 'myKeyVault', 'adDomainJoinUsername')
 param adDomainJoinPassword = getSecret('12345678-1234-1234-1234-123456789012', 'kv-rg', 'myKeyVault', 'adDomainJoinPassword')
 param adOuPath = getSecret('12345678-1234-1234-1234-123456789012', 'kv-rg', 'myKeyVault', 'adOuPath')
-```
-
-### Scenario 3: Hybrid - Some Values from Key Vault, Others Direct
-
-You can mix Key Vault references with direct values:
-
-```bicep
-// Sensitive credentials from Key Vault
-param adminUsername = getSecret('12345678-1234-1234-1234-123456789012', 'kv-rg', 'myKeyVault', 'adminUsername')
-param adminPassword = getSecret('12345678-1234-1234-1234-123456789012', 'kv-rg', 'myKeyVault', 'adminPassword')
-
-// Non-sensitive values directly in parameters file
-param vmName = 'myWindowsVM'
-param location = 'eastus'
-param vmSize = 'Standard_D4s_v5'
-param domainJoinType = 'None'
 ```
 
 ## Security Considerations

@@ -26,7 +26,7 @@
                             "name": "vmName",
                             "type": "Microsoft.Common.TextBox",
                             "label": "Virtual Machine Name",
-                            "placeholder": "myWindowsVM01",
+                            "placeholder": "testVM0101",
                             "defaultValue": "",
                             "toolTip": "Name of the virtual machine to create",
                             "constraints": {

@@ -15,7 +15,7 @@ using 'main.bicep'
 // Required Parameters
 // ================================================================================
 
-param vmName = 'myWindowsVM01'
+param vmName = 'testVM0101'
 param resourceGroupName = 'rg-windows-vms'
 param location = 'eastus'
 

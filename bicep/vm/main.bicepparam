@@ -31,16 +31,16 @@ param osDiskType = 'Standard_LRS'
 // Image Configuration
 // ================================================================================
 param imagePublisher = 'MicrosoftWindowsDesktop'
-param imageOffer = 'Windows-11'
-param imageSku = 'win11-25h2-ent'
+param imageOffer = 'office-365' // 'Windows-11'
+param imageSku = 'win11-25h2-avd-m365' // 'win11-25h2-ent'
 param imageVersion = 'latest'
 
 // ================================================================================
 // Static variables
 // ================================================================================
 var resouceGroupName = 'rg-Avd1Images-aue'
-var keyVaultName = 'kv-Avd1-dsplbxulhz-aue'
-var subscriptionId = '3fc4c8ac-a2b8-4b39-9729-f1a5eeacbab5'
+var keyVaultName = 'kv-Avd1-esplbxulhz-aue'
+var subscriptionId = '4fc4c8ac-a2b8-4b39-9729-f1a5eeacbab5'
 
 var virtualNetworkResourceGroup = 'rg-Avd1-Network-aue'
 var virtualNetworkName = 'vnet-Avd1-HostPools-australiaeast'

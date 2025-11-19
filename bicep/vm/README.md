@@ -30,12 +30,12 @@ This Bicep template deploys a Windows virtual machine into an existing Azure vir
 
 | Parameter | Description | Example |
 |-----------|-------------|---------|
-| `vmName` | Name of the virtual machine | `myWindowsVM` |
-| `vmSize` | Azure VM size | `Standard_D4s_v5` |
-| `osDiskType` | Storage type for OS disk | `Premium_LRS` |
-| `imagePublisher` | VM image publisher | `MicrosoftWindowsServer` |
-| `imageOffer` | VM image offer | `WindowsServer` |
-| `imageSku` | VM image SKU | `2022-datacenter-azure-edition` |
+| `vmName` | Name of the virtual machine | `testVM01` |
+| `vmSize` | Azure VM size | `Standard_D4as_v5` |
+| `osDiskType` | Storage type for OS disk | `StandardSSD_LRS` |
+| `imagePublisher` | VM image publisher | `MicrosoftWindowsDesktop` |
+| `imageOffer` | VM image offer | `Windows-11` |
+| `imageSku` | VM image SKU | `win11-24h2-ent` |
 | `adminUsername` | Administrator username | `azureadmin` |
 | `adminPassword` | Administrator password (secure) | *provided at runtime* |
 | `vnetResourceId` | Resource ID of existing VNet | `/subscriptions/.../virtualNetworks/myVNet` |
@@ -79,6 +79,8 @@ Optional parameters for running PowerShell scripts after deployment:
 
 ## Supported Operating Systems
 
+Windows desktop image available on Azure can be found here: [https://az-vm-image.info/?cmd=--all+--publisher+MicrosoftWindowsDesktop](https://az-vm-image.info/?cmd=--all+--publisher+MicrosoftWindowsDesktop). This list should show the Windows desktop images available, including basic Windows 10 and Windows 11 images, as well as images that include the Microsoft 365 apps. 
+
 ### Windows 11 Images (Client Licensing Enabled)
 
 ```bicep
@@ -120,7 +122,7 @@ imageSku: '2019-datacenter-g2'
 Supported OS disk types:
 - `Standard_LRS` - Standard HDD, locally redundant
 - `StandardSSD_LRS` - Standard SSD, locally redundant
-- `Premium_LRS` - Premium SSD, locally redundant (recommended)
+- `Premium_LRS` - Premium SSD, locally redundant
 - `StandardSSD_ZRS` - Standard SSD, zone-redundant
 - `Premium_ZRS` - Premium SSD, zone-redundant
 
@@ -176,9 +178,9 @@ az deployment group create `
   --parameters adminPassword='<secure-password>'
 ```
 
-### Example 4: Using Azure Key Vault for Secrets (RECOMMENDED)
+### Example 4: Using Azure Key Vault for Secrets
 
-Use the `main.keyvault.bicepparam` file to reference secrets stored in Azure Key Vault:
+Use the `main.bicepparam` file to reference secrets stored in Azure Key Vault:
 
 1. Create secrets in your Key Vault:
 ```powershell
@@ -190,7 +192,7 @@ az keyvault secret set --vault-name myKeyVault --name adDomainJoinPassword --val
 az keyvault secret set --vault-name myKeyVault --name adOuPath --value "OU=Servers,DC=contoso,DC=com"
 ```
 
-2. Update `main.keyvault.bicepparam` with your Key Vault details:
+2. Update `main.bicepparam` with your Key Vault details:
 ```bicep
 param adminUsername = getSecret('00000000-0000-0000-0000-000000000000', 'myKeyVaultRG', 'myKeyVault', 'adminUsername')
 param adminPassword = getSecret('00000000-0000-0000-0000-000000000000', 'myKeyVaultRG', 'myKeyVault', 'adminPassword')
@@ -201,7 +203,7 @@ param adminPassword = getSecret('00000000-0000-0000-0000-000000000000', 'myKeyVa
 az deployment group create `
   --resource-group myResourceGroup `
   --template-file main.bicep `
-  --parameters main.keyvault.bicepparam
+  --parameters main.bicepparam
 ```
 
 **Note**: The deployment identity (user or service principal) must have `Get` and `List` permissions on Key Vault secrets.
@@ -234,9 +236,9 @@ Update `main.bicepparam` to run a script after deployment:
 
 ```bicep
 param runCustomScript = true
-param scriptUrl = 'https://raw.githubusercontent.com/myorg/scripts/main/configure-server.ps1'
-param scriptFileName = 'configure-server.ps1'
-param scriptArguments = '-Environment Production -Region EastUS'
+param scriptUrl = 'https://stavddsplbxuncheac.blob.core.windows.net/scripts/Install-Agents.ps1'
+param scriptFileName = 'Install-Agents.ps1'
+param scriptArguments = ''
 ```
 
 Deploy:
@@ -245,8 +247,7 @@ Deploy:
 az deployment group create `
   --resource-group myResourceGroup `
   --template-file main.bicep `
-  --parameters main.bicepparam `
-  --parameters adminPassword='<secure-password>'
+  --parameters main.bicepparam
 ```
 
 ### Example 7: AD Domain Join + Custom Script
@@ -364,7 +365,7 @@ az keyvault set-policy `
 
 #### Step 3: Reference Secrets in Parameters File
 
-Use the `main.keyvault.bicepparam` file or update `main.bicepparam` with `getSecret()` calls:
+Use the `main.bicepparam` file or update `main.bicepparam` with `getSecret()` calls:
 
 ```bicep
 // Format: getSecret('subscription-id', 'resource-group', 'keyvault-name', 'secret-name')
@@ -382,7 +383,7 @@ param adOuPath = getSecret('00000000-0000-0000-0000-000000000000', 'myKeyVaultRG
 az deployment group create `
   --resource-group myResourceGroup `
   --template-file main.bicep `
-  --parameters main.keyvault.bicepparam
+  --parameters main.bicepparam
 ```
 
 ### Key Vault Best Practices

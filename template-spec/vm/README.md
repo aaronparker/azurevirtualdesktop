@@ -108,7 +108,7 @@ New-AzSubscriptionDeployment `
 
 | Parameter | Description | Example |
 |-----------|-------------|---------|
-| `vmName` | Virtual machine name | `myWindowsVM01` |
+| `vmName` | Virtual machine name | `testVM0101` |
 | `resourceGroupName` | Resource group name | `rg-windows-vms` |
 | `location` | Azure region | `eastus` |
 | `vnetResourceId` | Virtual network resource ID | `/subscriptions/.../virtualNetworks/vnet-main` |
@@ -144,7 +144,7 @@ When `domainJoinType = 'ActiveDirectory'`, these are retrieved from Key Vault:
 Update `main.bicepparam` with your values:
 
 ```bicep
-param vmName = 'myWindowsVM01'
+param vmName = 'testVM0101'
 param resourceGroupName = 'rg-windows-vms'
 param location = 'eastus'
 param vnetResourceId = '/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-network/providers/Microsoft.Network/virtualNetworks/vnet-main'
