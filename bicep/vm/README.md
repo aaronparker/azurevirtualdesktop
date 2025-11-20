@@ -128,17 +128,7 @@ Supported OS disk types:
 
 ## Deployment Examples
 
-### Example 1: Windows Server 2022 without Domain Join
-
-```powershell
-az deployment group create `
-  --resource-group myResourceGroup `
-  --template-file main.bicep `
-  --parameters main.bicepparam `
-  --parameters adminPassword='<secure-password>'
-```
-
-### Example 2: Windows 11 with Entra ID Join
+### Example: Windows 11 with Entra ID Join
 
 Update `main.bicepparam`:
 
@@ -155,11 +145,10 @@ Deploy:
 az deployment group create `
   --resource-group myResourceGroup `
   --template-file main.bicep `
-  --parameters main.bicepparam `
-  --parameters adminPassword='<secure-password>'
+  --parameters main.bicepparam
 ```
 
-### Example 3: Standard VM without Trusted Launch
+### Example: Standard VM without Trusted Launch
 
 For VM sizes or images that don't support Trusted Launch:
 
@@ -174,8 +163,7 @@ Deploy:
 az deployment group create `
   --resource-group myResourceGroup `
   --template-file main.bicep `
-  --parameters main.bicepparam `
-  --parameters adminPassword='<secure-password>'
+  --parameters main.bicepparam
 ```
 
 ### Example 4: Using Azure Key Vault for Secrets
@@ -193,6 +181,7 @@ az keyvault secret set --vault-name myKeyVault --name adOuPath --value "OU=Serve
 ```
 
 2. Update `main.bicepparam` with your Key Vault details:
+
 ```bicep
 param adminUsername = getSecret('00000000-0000-0000-0000-000000000000', 'myKeyVaultRG', 'myKeyVault', 'adminUsername')
 param adminPassword = getSecret('00000000-0000-0000-0000-000000000000', 'myKeyVaultRG', 'myKeyVault', 'adminPassword')
@@ -208,7 +197,7 @@ az deployment group create `
 
 **Note**: The deployment identity (user or service principal) must have `Get` and `List` permissions on Key Vault secrets.
 
-### Example 5: Windows Server with Active Directory Domain Join
+### Example: Windows Server with Active Directory Domain Join
 
 Update `main.bicepparam`:
 
@@ -225,12 +214,10 @@ Deploy:
 az deployment group create `
   --resource-group myResourceGroup `
   --template-file main.bicep `
-  --parameters main.bicepparam `
-  --parameters adminPassword='<secure-password>' `
-  --parameters adDomainJoinPassword='<domain-join-password>'
+  --parameters main.bicepparam
 ```
 
-### Example 6: Windows Server with Custom Script Execution
+### Example: Windows Server with Custom Script Execution
 
 Update `main.bicepparam` to run a script after deployment:
 
@@ -250,7 +237,7 @@ az deployment group create `
   --parameters main.bicepparam
 ```
 
-### Example 7: AD Domain Join + Custom Script
+### Example: AD Domain Join + Custom Script
 
 Combine domain join with script execution:
 
@@ -264,16 +251,6 @@ param scriptFileName = 'post-domain-join.ps1'
 ```
 
 **Note**: The custom script executes after domain join completes successfully.
-
-### Example 8: Deployment with PowerShell
-
-```powershell
-New-AzResourceGroupDeployment `
-  -ResourceGroupName myResourceGroup `
-  -TemplateFile main.bicep `
-  -TemplateParameterFile main.bicepparam `
-  -adminPassword (ConvertTo-SecureString '<secure-password>' -AsPlainText -Force)
-```
 
 ## Trusted Launch vs Standard VMs
 
@@ -540,7 +517,3 @@ az deployment group validate `
 - [Windows Client in Azure](https://learn.microsoft.com/azure/virtual-machines/windows/client-images)
 - [Join a Windows VM to Entra ID](https://learn.microsoft.com/entra/identity/devices/howto-vm-sign-in-azure-ad-windows)
 - [Join a Windows VM to Active Directory](https://learn.microsoft.com/azure/active-directory-domain-services/join-windows-vm)
-
-## License
-
-This template is provided as-is under the MIT License.
