@@ -21,7 +21,7 @@ using 'main.bicep'
 // ================================================================================
 // VM Configuration
 // ================================================================================
-param vmName = 'TestVM01'
+param vmName = 'TestVM03'
 param location = 'australiaeast'
 param availabilityZone = '1'
 param vmSize = 'Standard_D4as_v5'
@@ -32,18 +32,15 @@ param osDiskType = 'Standard_LRS'
 // ================================================================================
 param imagePublisher = 'MicrosoftWindowsDesktop'
 param imageOffer = 'office-365' // 'Windows-11'
-param imageSku = 'win11-25h2-avd-m365' // 'win11-25h2-ent'
+param imageSku = 'win11-25h2-avd-m365' // 'win11-25h2-ent-m365'
 param imageVersion = 'latest'
 
 // ================================================================================
 // Static variables
 // ================================================================================
 var resouceGroupName = 'rg-Avd1Images-aue'
-var keyVaultName = 'kv-Avd1-esplbxulhz-aue'
-var subscriptionId = '4fc4c8ac-a2b8-4b39-9729-f1a5eeacbab5'
-
-var virtualNetworkResourceGroup = 'rg-Avd1-Network-aue'
-var virtualNetworkName = 'vnet-Avd1-HostPools-australiaeast'
+var keyVaultName = 'kv-Avd1-dsplbxulhz-aue'
+var subscriptionId = '3fc4c8ac-a2b8-4b39-9729-f1a5eeacbab5'
 
 // ================================================================================
 // Administrator Credentials - FROM KEY VAULT
@@ -55,6 +52,8 @@ param adminPassword = getSecret(subscriptionId, resouceGroupName, keyVaultName, 
 // ================================================================================
 // Network Configuration
 // ================================================================================
+var virtualNetworkResourceGroup = 'rg-Avd1-Network-aue'
+var virtualNetworkName = 'vnet-Avd1-HostPools-australiaeast'
 param vnetResourceId = '/subscriptions/${subscriptionId}/resourceGroups/${virtualNetworkResourceGroup}/providers/Microsoft.Network/virtualNetworks/${virtualNetworkName}'
 param subnetName = 'Desktops4'
 
@@ -72,15 +71,15 @@ param adOuPath = getSecret(subscriptionId, resouceGroupName, keyVaultName, 'adOu
 // ================================================================================
 // Additional Settings
 // ================================================================================
-param enableTrustedLaunch = true  // Set to false for Standard (non-Trusted Launch) VMs
+param enableTrustedLaunch = true // Set to false for Standard (non-Trusted Launch) VMs
 param enableBootDiagnostics = true
 
 // ================================================================================
 // Custom Script Execution
 // ================================================================================
-param runCustomScript = false
-param scriptUrl = ''
-param scriptFileName = ''
+param runCustomScript = true
+param scriptUrl = 'https://stavddsplbxulhzmac.blob.core.windows.net/scripts/Install-OmnissaHorizon.ps1'
+param scriptFileName = 'Install-OmnissaHorizon.ps1'
 param scriptArguments = ''
 
 // ================================================================================
